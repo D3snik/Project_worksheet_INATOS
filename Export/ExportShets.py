@@ -22,8 +22,9 @@ def extrair_dados_pdf(pdf_file):
     with pdfplumber.open(pdf_file) as pdf:
         for pagina in pdf.pages:
             texto = pagina.extract_text()
-            if texto:
-                st.text_area("Texto extraído da página", texto, height=300)
+            # DEBUG: Visualizar texto extraído do PDF
+            # if texto:
+            #     st.text_area("Texto extraído da página", texto, height=300)
             if not texto:
                 continue
             # Divide por funcionário (matrícula - nome)
