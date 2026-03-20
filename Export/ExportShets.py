@@ -1,4 +1,5 @@
 import streamlit as st
+from Export.cargos.lista_cargos import CARGOS_POSSIVEIS
 import pandas as pd
 import pdfplumber
 import io
@@ -36,9 +37,8 @@ def extrair_dados_pdf(pdf_file):
                 linha = {c: "" for c in colunas}
                 # Matrícula, Nome, Cargo
                 match_func = re.search(r'^(\d{6}) - (.+)', bloco)
-                cargos_possiveis = [
-                    "MONITOR I", "PROFESSOR I", "AUXILIAR I", "COORDENADOR I", "COORDENADOR REGIONAL","COORDENADOR TECNICO" 
-                ]
+                # Lista de cargos importada
+                cargos_possiveis = CARGOS_POSSIVEIS
                 if match_func:
                     nome_completo = match_func.group(2).strip()
                     cargo_encontrado = None
