@@ -1,5 +1,5 @@
 import streamlit as st
-from Export.cargos.lista_cargos import CARGOS_POSSIVEIS
+from cargos.lista_cargos import CARGOS_POSSIVEIS
 import pandas as pd
 import pdfplumber
 import io
