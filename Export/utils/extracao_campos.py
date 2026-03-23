@@ -2,8 +2,17 @@ import re
 
 def extrair_imposto_renda(bloco):
     # Procura por "Imposto de Renda" seguido de valor
-    match = re.search(r'Imposto de Renda\s*([\d\.,]+)', bloco, re.IGNORECASE)
-    return match.group(1) if match else ""
+    match = re.search(r'Imposto de Renda\s*(-?[\d\.,]+)', bloco, re.IGNORECASE)
+    if match:
+        valor = match.group(1).replace('.', '').replace(',', '.')
+        try:
+            valor_float = float(valor)
+            if valor_float < 0:
+                return "0"
+            return str(match.group(1))
+        except Exception:
+            return match.group(1)
+    return "0"
 
 def extrair_atividade(bloco):
         match_afastado = re.search(r'Afastado Definitivamente\s*em\s*(\d{2}/\d{2}/\d{4})', bloco, re.IGNORECASE)
@@ -28,7 +37,16 @@ def extrair_inss_desc(bloco):
 
 def extrair_salario_familia(bloco):
     match = re.search(r'Salário Familia\s*([\d\.,]+)', bloco)
-    return match.group(1) if match else ""
+    if match:
+        valor = match.group(1).replace('.', '').replace(',', '.')
+        try:
+            valor_float = float(valor)
+            if valor_float < 0:
+                return "0"
+            return str(match.group(1))
+        except Exception:
+            return match.group(1)
+    return "0"
 
 def extrair_totais(bloco):
     match = re.search(r'Salário Líquido\s*Base INSS\s*Base INSS Patronal\s*Base IRRF\s*Base FGTS\s*Valor FGTS\s*([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)', bloco)
