@@ -99,7 +99,10 @@ def extrair_atividade(bloco):
 
 def extrair_salario_base(bloco):
     match = re.search(r'Salário Base\s*([\d\.,]+)', bloco)
-    return match.group(1) if match else ""
+    if match:
+        return match.group(1)
+    match_maternidade = re.search(r'Salário Maternidade\s*([\d\.,]+)', bloco, re.IGNORECASE)
+    return match_maternidade.group(1) if match_maternidade else ""
 
 def extrair_inss_desc(bloco):
     match = re.search(r'INSS\s*([\d\.,]+)', bloco)
