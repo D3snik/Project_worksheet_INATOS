@@ -94,45 +94,123 @@ def render_estilos():
         }
 
         .tool-card {
-            background: rgba(255, 255, 255, 0.88);
-            border: 1px solid rgba(36, 36, 36, 0.08);
-            border-radius: 24px;
-            padding: 1.6rem;
-            min-height: 235px;
-            box-shadow: 0 16px 40px rgba(70, 55, 24, 0.07);
+            background: #ffffff;
+            border: 1px solid #d8d8e0;
+            border-radius: 22px;
+            padding: 1.8rem 1.75rem;
+            min-height: 250px;
+            box-shadow: none;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
         }
 
-        .tool-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 18px;
+        .tool-card:hover {
+            border-color: #1b1b1b;
+            box-shadow: 0 0 0 1px #1b1b1b;
+            transform: translateY(-1px);
+        }
+
+        .tool-card-link {
+            text-decoration: none !important;
+            display: block;
+            color: inherit !important;
+        }
+
+        .tool-card-link:hover {
+            text-decoration: none !important;
+        }
+
+        .tool-icon-wrap {
+            width: 74px;
+            height: 74px;
+            position: relative;
+            margin-bottom: 1.1rem;
+        }
+
+        .tool-icon-default,
+        .tool-icon-hover {
+            position: absolute;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            transition: opacity 0.18s ease, transform 0.18s ease;
         }
 
-        .tool-icon-red {
-            background: linear-gradient(135deg, #ff8b6b 0%, #e24d37 100%);
+        .tool-icon-hover {
+            opacity: 0;
+            transform: scale(0.92);
         }
 
-        .tool-icon-blue {
-            background: linear-gradient(135deg, #89b4ff 0%, #4b74d9 100%);
+        .tool-card:hover .tool-icon-default {
+            opacity: 0;
+            transform: scale(0.92);
+        }
+
+        .tool-card:hover .tool-icon-hover {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .tool-icon-image {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            border-radius: 16px;
+        }
+
+        .tool-icon-stack {
+            position: relative;
+            width: 60px;
+            height: 48px;
+        }
+
+        .tool-icon-square {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: #f87850;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .tool-icon-square.back {
+            top: 10px;
+            left: 20px;
+        }
+
+        .tool-icon-square.front {
+            top: 0;
+            left: 0;
+        }
+
+        .tool-icon-note {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #7aa6ff 0%, #4f76d8 100%);
+            color: #ffffff;
+            font-size: 1.7rem;
+            box-shadow: inset 0 -10px 18px rgba(0, 0, 0, 0.12);
         }
 
         .tool-title {
             color: #252525;
-            font-size: 1.6rem;
+            font-size: 1.28rem;
             font-weight: 700;
-            margin-bottom: 0.55rem;
+            margin-bottom: 0.75rem;
         }
 
         .tool-copy {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
+            color: #6c6c74;
+            font-size: 0.98rem;
+            line-height: 1.45;
+            margin-bottom: 0;
         }
 
         .panel {
