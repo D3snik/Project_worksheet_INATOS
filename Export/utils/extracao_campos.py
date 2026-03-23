@@ -1,5 +1,27 @@
 import re
 
+
+def _valor_para_float(valor):
+    return float(valor.replace('.', '').replace(',', '.'))
+
+
+def _extrair_valor_evento(bloco, padrao):
+    match = re.search(padrao, bloco, re.IGNORECASE)
+    if not match:
+        return 0.0
+    try:
+        valor_float = _valor_para_float(match.group(1))
+        return max(valor_float, 0.0)
+    except Exception:
+        return 0.0
+
+
+def extrair_plano_saude(bloco):
+    valor_titular = _extrair_valor_evento(bloco, r'Plano de Sa[úu]de Titular\s*([\d\.,]+)')
+    valor_dependente = _extrair_valor_evento(bloco, r'Plano de Sa[úu]de Dependente\s*([\d\.,]+)')
+    valor_total = valor_titular + valor_dependente
+    return f"{valor_total:,.2f}".replace(',', '#').replace('.', ',').replace('#', '.') if valor_total else "0"
+
 def extrair_inss_ferias(bloco):
     # Procura por "INSS Sobre Férias" seguido de valor
     match = re.search(r'INSS Sobre F[ée]rias\s*([\d\.,]+)', bloco, re.IGNORECASE)
