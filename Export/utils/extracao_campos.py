@@ -15,10 +15,9 @@ def extrair_inss_ferias(bloco):
     return "0"
 
 def extrair_inss_13(bloco):
-    # Procura por linha que contenha apenas "INSS 13" (com ou sem º), seguido de valor
-    # Procura por linha que contenha explicitamente 'INSS 13º' (com ou sem º)
-    # Busca todas as ocorrências de 'INSS 13º' (com ou sem º, com espaços opcionais)
-    # Busca todas as linhas de desconto e procura por INSS 13º (com ou sem º, com espaços opcionais)
+    afastado = re.search(r'afastado definitivamente', bloco, re.IGNORECASE)
+    if not afastado:
+        return "0"
     linhas = bloco.splitlines()
     for linha in linhas:
         if re.search(r'INSS\s*13\s*º?', linha, re.IGNORECASE):
