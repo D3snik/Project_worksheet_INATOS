@@ -5,9 +5,9 @@ EXCEL_ICON_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAA2FBMVEX///8
 
 
 def inicializar_navegacao():
-    ferramenta_query = st.query_params.get("tool", "folha")
-    if ferramenta_query not in {"folha", "notas"}:
-        ferramenta_query = "folha"
+    ferramenta_query = st.query_params.get("tool", "home")
+    if ferramenta_query not in {"home", "folha", "notas"}:
+        ferramenta_query = "home"
     st.session_state["ferramenta_ativa"] = ferramenta_query
 
 
@@ -46,12 +46,6 @@ def render_cards():
                 <div class="tool-card">
                     <div class="tool-icon-wrap">
                         <div class="tool-icon-default">
-                            <div class="tool-icon-stack">
-                                <div class="tool-icon-square front">↘</div>
-                                <div class="tool-icon-square back">↖</div>
-                            </div>
-                        </div>
-                        <div class="tool-icon-hover">
                             <img class="tool-icon-image" src="data:image/png;base64,{EXCEL_ICON_BASE64}" alt="Excel" />
                         </div>
                     </div>
@@ -70,9 +64,6 @@ def render_cards():
                 <div class="tool-card">
                     <div class="tool-icon-wrap">
                         <div class="tool-icon-default">
-                            <div class="tool-icon-note">📝</div>
-                        </div>
-                        <div class="tool-icon-hover">
                             <div class="tool-icon-note">📝</div>
                         </div>
                     </div>

@@ -126,29 +126,12 @@ def render_estilos():
             margin-bottom: 1.1rem;
         }
 
-        .tool-icon-default,
-        .tool-icon-hover {
-            position: absolute;
-            inset: 0;
+        .tool-icon-default {
+            width: 74px;
+            height: 74px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.18s ease, transform 0.18s ease;
-        }
-
-        .tool-icon-hover {
-            opacity: 0;
-            transform: scale(0.92);
-        }
-
-        .tool-card:hover .tool-icon-default {
-            opacity: 0;
-            transform: scale(0.92);
-        }
-
-        .tool-card:hover .tool-icon-hover {
-            opacity: 1;
-            transform: scale(1);
         }
 
         .tool-icon-image {
@@ -156,37 +139,6 @@ def render_estilos():
             height: 64px;
             object-fit: contain;
             border-radius: 16px;
-        }
-
-        .tool-icon-stack {
-            position: relative;
-            width: 60px;
-            height: 48px;
-        }
-
-        .tool-icon-square {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            background: #f87850;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .tool-icon-square.back {
-            top: 10px;
-            left: 20px;
-        }
-
-        .tool-icon-square.front {
-            top: 0;
-            left: 0;
         }
 
         .tool-icon-note {
@@ -231,6 +183,94 @@ def render_estilos():
         .panel p {
             color: #666;
             margin-bottom: 1.2rem;
+        }
+
+        .tool-hero {
+            text-align: center;
+            padding: 2.6rem 0 0.6rem 0;
+        }
+
+        .tool-hero h1 {
+            color: #26324a;
+            font-size: 3rem;
+            line-height: 1.06;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.9rem;
+        }
+
+        .tool-hero p {
+            color: #44516a;
+            font-size: 1.05rem;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .tool-upload-shell {
+            max-width: 760px;
+            margin: 1.4rem auto 0 auto;
+            text-align: center;
+        }
+
+        .tool-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #5a6477;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .tool-back-link:hover {
+            color: #1b1b1b;
+        }
+
+        .upload-help {
+            color: #51607d;
+            margin-top: 0.8rem;
+            font-size: 0.96rem;
+        }
+
+        div[data-testid="stFileUploader"] {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        div[data-testid="stFileUploader"] section {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        div[data-testid="stFileUploaderDropzone"] {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        div[data-testid="stFileUploader"] button {
+            background: #ef3b33;
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            min-height: 78px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 800;
+            box-shadow: 0 10px 24px rgba(239, 59, 51, 0.24);
+        }
+
+        div[data-testid="stFileUploader"] button:hover {
+            background: #d9322b;
+            color: #ffffff;
+        }
+
+        div[data-testid="stFileUploader"] small {
+            display: none;
+        }
+
+        .result-shell {
+            margin-top: 2rem;
         }
         </style>
         """,

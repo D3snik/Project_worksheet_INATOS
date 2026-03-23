@@ -9,10 +9,11 @@ from ui.theme import configurar_pagina, render_estilos
 configurar_pagina()
 render_estilos()
 inicializar_navegacao()
-render_topo()
-render_cards()
 
-if st.session_state["ferramenta_ativa"] == "folha":
+if st.session_state["ferramenta_ativa"] == "home":
+    render_topo()
+    render_cards()
+elif st.session_state["ferramenta_ativa"] == "folha":
     render_modulo_folha()
 else:
     render_modulo_notas()
