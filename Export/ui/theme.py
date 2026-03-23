@@ -236,6 +236,10 @@ def render_estilos():
             margin: 0 auto;
         }
 
+        div[data-testid="stFileUploader"] > div {
+            width: 100%;
+        }
+
         div[data-testid="stFileUploader"] section,
         div[data-testid="stFileUploaderDropzone"],
         div[data-testid="stFileUploaderDropzone"] > div {
@@ -266,7 +270,8 @@ def render_estilos():
             border: none;
             border-radius: 14px;
             min-height: 82px;
-            min-width: 370px;
+            width: 100%;
+            max-width: 420px;
             padding: 1rem 2.4rem;
             font-size: 1.55rem;
             font-weight: 800;
@@ -289,8 +294,7 @@ def render_estilos():
 
         div[data-testid="stFileUploaderFile"],
         div[data-testid="stFileUploaderFileName"],
-        div[data-testid="stFileUploaderDeleteBtn"],
-        div[data-testid="stFileUploader"] [data-testid="stBaseButton-secondary"] {
+        div[data-testid="stFileUploaderDeleteBtn"] {
             display: none !important;
         }
 
