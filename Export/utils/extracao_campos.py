@@ -1,4 +1,11 @@
+
 import re
+
+def extrair_atividade(bloco):
+    # Exemplos de padrões: Normal, Afastado Definitivamente 01/01/2024, Licença Maternidade, etc
+    # Ajuste os padrões conforme necessário para o seu PDF
+    match = re.search(r'(Normal|F[ée]rias|Afastado Definitivamente ?\d{2}/\d{2}/\d{4}|Licen[çc]a Maternidade|Licen[çc]a Paternidade|Afastado Provisoriamente ?\d{2}/\d{2}/\d{4}|Afastado|Licen[çc]a)', bloco, re.IGNORECASE)
+    return match.group(0).strip() if match else "Normal"
 
 def extrair_salario_base(bloco):
     match = re.search(r'Salário Base\s*([\d\.,]+)', bloco)

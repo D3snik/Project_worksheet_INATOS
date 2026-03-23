@@ -15,7 +15,7 @@ st.write("Faça o upload do PDF da folha gerado pelo sistema Persona Sql (Nasajo
 # --- 2. LÓGICA DE EXTRAÇÃO ---
 def extrair_dados_pdf(pdf_file):
     colunas = [
-        "FUNCIONÁRIO", "CARGO", "SALARIO BASE", "SALARIO LIQUIDO", 
+        "FUNCIONÁRIO", "CARGO", "ATIVIDADE", "SALARIO BASE", "SALARIO LIQUIDO", 
         "BASE INSS PATRONAL", "BASE INSS", "INSS DESCON", 
         "SALARIOFAMILIA", "BASE FGTS", "FGTS DESCON"
     ]
@@ -59,6 +59,9 @@ def extrair_dados_pdf(pdf_file):
                         else:
                             linha["FUNCIONÁRIO"] = nome_completo
                             linha["CARGO"] = ""
+                # Atividade
+                from utils.extracao_campos import extrair_atividade
+                linha["ATIVIDADE"] = extrair_atividade(bloco)
                 # Salário Base
                 linha["SALARIO BASE"] = extrair_salario_base(bloco)
                 # INSS Desconto
