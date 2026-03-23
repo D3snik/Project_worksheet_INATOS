@@ -18,7 +18,7 @@ def render_modulo_folha():
         unsafe_allow_html=True,
     )
 
-    mostrar_texto_extraido = st.toggle("Mostrar texto extraído por página", value=False)
+    # mostrar_texto_extraido = st.toggle("Mostrar texto extraído por página", value=False)
     arquivo_pdf = st.file_uploader("Selecionar PDF", type="pdf", label_visibility="collapsed")
 
     st.markdown(
@@ -36,13 +36,14 @@ def render_modulo_folha():
     with st.spinner('Lendo o PDF e organizando as colunas... Isso pode levar alguns segundos.'):
         df_resultado = extrair_dados_pdf(
             arquivo_pdf,
-            on_page_text=(
-                lambda indice_pagina, texto: st.text_area(
-                    f"Texto extraído da página {indice_pagina}",
-                    texto,
-                    height=260,
-                )
-            ) if mostrar_texto_extraido else None,
+            # on_page_text=(
+            #     lambda indice_pagina, texto: st.text_area(
+            #         f"Texto extraído da página {indice_pagina}",
+            #         texto,
+            #         height=260,
+            #     )
+            # ) if mostrar_texto_extraido else None,
+            on_page_text=None,
         )
 
     st.markdown('<div class="result-shell">', unsafe_allow_html=True)

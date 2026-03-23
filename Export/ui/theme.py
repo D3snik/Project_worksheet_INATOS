@@ -236,6 +236,14 @@ def render_estilos():
             margin: 0 auto;
         }
 
+        div[data-testid="stFileUploader"] section,
+        div[data-testid="stFileUploaderDropzone"],
+        div[data-testid="stFileUploaderDropzone"] > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         div[data-testid="stFileUploader"] > label {
             display: none;
         }
@@ -263,6 +271,7 @@ def render_estilos():
             font-size: 1.55rem;
             font-weight: 800;
             box-shadow: 0 10px 24px rgba(239, 59, 51, 0.24);
+            margin: 0 auto;
         }
 
         div[data-testid="stFileUploader"] button:hover {
@@ -276,6 +285,13 @@ def render_estilos():
 
         div[data-testid="stFileUploaderDropzoneInstructions"] {
             display: none;
+        }
+
+        div[data-testid="stFileUploaderFile"],
+        div[data-testid="stFileUploaderFileName"],
+        div[data-testid="stFileUploaderDeleteBtn"],
+        div[data-testid="stFileUploader"] [data-testid="stBaseButton-secondary"] {
+            display: none !important;
         }
 
         div[data-testid="stFileUploader"] small {
