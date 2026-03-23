@@ -19,7 +19,7 @@ def render_modulo_folha():
     )
 
     mostrar_texto_extraido = st.toggle("Mostrar texto extraído por página", value=False)
-    arquivo_pdf = st.file_uploader("Selecionar arquivo PDF", type="pdf")
+    arquivo_pdf = st.file_uploader("Selecionar PDF", type="pdf", label_visibility="collapsed")
 
     st.markdown(
         """

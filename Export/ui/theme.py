@@ -226,7 +226,7 @@ def render_estilos():
         }
 
         .upload-help {
-            color: #51607d;
+            color: #1f1f1f;
             margin-top: 0.8rem;
             font-size: 0.96rem;
         }
@@ -234,6 +234,10 @@ def render_estilos():
         div[data-testid="stFileUploader"] {
             max-width: 760px;
             margin: 0 auto;
+        }
+
+        div[data-testid="stFileUploader"] > label {
+            display: none;
         }
 
         div[data-testid="stFileUploader"] section {
@@ -253,9 +257,10 @@ def render_estilos():
             color: #ffffff;
             border: none;
             border-radius: 14px;
-            min-height: 78px;
-            padding: 1rem 2rem;
-            font-size: 1rem;
+            min-height: 82px;
+            min-width: 370px;
+            padding: 1rem 2.4rem;
+            font-size: 1.55rem;
             font-weight: 800;
             box-shadow: 0 10px 24px rgba(239, 59, 51, 0.24);
         }
@@ -265,8 +270,21 @@ def render_estilos():
             color: #ffffff;
         }
 
+        div[data-testid="stFileUploader"] button * {
+            color: #ffffff !important;
+        }
+
+        div[data-testid="stFileUploaderDropzoneInstructions"] {
+            display: none;
+        }
+
         div[data-testid="stFileUploader"] small {
             display: none;
+        }
+
+        div[data-testid="stSpinner"] p,
+        .stSpinner p {
+            color: #1f1f1f !important;
         }
 
         .result-shell {
