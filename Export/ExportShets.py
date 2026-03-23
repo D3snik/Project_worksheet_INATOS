@@ -1,5 +1,8 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import streamlit as st
-from cargos.lista_cargos import CARGOS_POSSIVEIS
+from Export.cargos.lista_cargos import CARGOS_POSSIVEIS
 import pandas as pd
 import pdfplumber
 import io
