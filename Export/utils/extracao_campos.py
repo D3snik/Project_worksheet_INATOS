@@ -18,16 +18,20 @@ def extrair_inss_13(bloco):
     # Procura por linha que contenha apenas "INSS 13" (com ou sem º), seguido de valor
     # Procura por linha que contenha explicitamente 'INSS 13º' (com ou sem º)
     # Busca todas as ocorrências de 'INSS 13º' (com ou sem º, com espaços opcionais)
-    matches = re.findall(r'^\s*INSS\s+13\s*º?\s+([\d\.,]+)', bloco, re.IGNORECASE | re.MULTILINE)
-    if matches:
-        valor = matches[-1].replace('.', '').replace(',', '.')
-        try:
-            valor_float = float(valor)
-            if valor_float < 0:
-                return "0"
-            return matches[-1]
-        except Exception:
-            return matches[-1]
+    # Busca todas as linhas de desconto e procura por INSS 13º (com ou sem º, com espaços opcionais)
+    linhas = bloco.splitlines()
+    for linha in linhas:
+        if re.search(r'INSS\s*13\s*º?', linha, re.IGNORECASE):
+            match = re.search(r'INSS\s*13\s*º?\s*([\d\.,]+)', linha, re.IGNORECASE)
+            if match:
+                valor = match.group(1).replace('.', '').replace(',', '.')
+                try:
+                    valor_float = float(valor)
+                    if valor_float < 0:
+                        return "0"
+                    return match.group(1)
+                except Exception:
+                    return match.group(1)
     return "0"
 
 def extrair_desc_vt(bloco):

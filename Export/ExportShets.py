@@ -59,11 +59,12 @@ def extrair_dados_pdf(pdf_file):
                         else:
                             linha["FUNCIONÁRIO"] = nome_completo
                             linha["CARGO"] = ""
+                # Passar nome_completo para extrair_inss_13 via closure
+                linha["NOME_COMPLETO"] = nome_completo if match_func else ""
                 # Atividade
                 from utils.extracao_campos import extrair_atividade, extrair_imposto_renda, extrair_desc_vt, extrair_inss_13, extrair_inss_ferias
 
                 linha["INSS SOBRE FÉRIAS"] = extrair_inss_ferias(bloco)
-                # INSS 13º
                 linha["INSS 13º"] = extrair_inss_13(bloco)
                 # Desconto de Vale Transporte
                 linha["DESC VALE TRANSPORTE"] = extrair_desc_vt(bloco)
