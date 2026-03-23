@@ -15,8 +15,8 @@ def extrair_inss_ferias(bloco):
     return "0"
 
 def extrair_inss_13(bloco):
-    # Procura por "INSS 13º" seguido de valor, ignorando referência
-    match = re.search(r'INSS 13.?\s*([\d\.,]+)(?:\s|$)', bloco, re.IGNORECASE)
+    # Procura por linha que contenha apenas "INSS 13" (com ou sem º), seguido de valor
+    match = re.search(r'^[^\S\r\n]*INSS 13.?\s*([\d\.,]+)', bloco, re.IGNORECASE | re.MULTILINE)
     if match:
         valor = match.group(1).replace('.', '').replace(',', '.')
         try:
