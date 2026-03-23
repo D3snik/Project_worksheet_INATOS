@@ -15,22 +15,16 @@ def extrair_inss_ferias(bloco):
     return "0"
 
 def extrair_inss_13(bloco):
-    afastado = re.search(r'afastado definitivamente', bloco, re.IGNORECASE)
-    if not afastado:
-        return "0"
-    linhas = bloco.splitlines()
-    for linha in linhas:
-        if re.search(r'INSS\s*13\s*º?', linha, re.IGNORECASE):
-            match = re.search(r'INSS\s*13\s*º?\s*([\d\.,]+)', linha, re.IGNORECASE)
-            if match:
-                valor = match.group(1).replace('.', '').replace(',', '.')
-                try:
-                    valor_float = float(valor)
-                    if valor_float < 0:
-                        return "0"
-                    return match.group(1)
-                except Exception:
-                    return match.group(1)
+    match = re.search(r'INSS\s*13\s*[ºo]\s*([\d\.,]+)', bloco, re.IGNORECASE)
+    if match:
+        valor = match.group(1).replace('.', '').replace(',', '.')
+        try:
+            valor_float = float(valor)
+            if valor_float < 0:
+                return "0"
+            return match.group(1)
+        except Exception:
+            return match.group(1)
     return "0"
 
 def extrair_desc_vt(bloco):
