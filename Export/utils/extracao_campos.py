@@ -15,15 +15,15 @@ def extrair_inss_ferias(bloco):
     return "0"
 
 def extrair_inss_13(bloco):
-    # Procura por "INSS 13º" seguido de valor
-    match = re.search(r'INSS 13.?\s*([\d\.,]+)', bloco, re.IGNORECASE)
+    # Procura por "INSS 13º" seguido de valor, ignorando referência
+    match = re.search(r'INSS 13.?\s*([\d\.,]+)(?:\s|$)', bloco, re.IGNORECASE)
     if match:
         valor = match.group(1).replace('.', '').replace(',', '.')
         try:
             valor_float = float(valor)
             if valor_float < 0:
                 return "0"
-            return str(match.group(1))
+            return match.group(1)
         except Exception:
             return match.group(1)
     return "0"
