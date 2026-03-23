@@ -1,5 +1,9 @@
-
 import re
+
+def extrair_imposto_renda(bloco):
+    # Procura por "Imposto de Renda" seguido de valor
+    match = re.search(r'Imposto de Renda\s*([\d\.,]+)', bloco, re.IGNORECASE)
+    return match.group(1) if match else ""
 
 def extrair_atividade(bloco):
         match_afastado = re.search(r'Afastado Definitivamente\s*em\s*(\d{2}/\d{2}/\d{4})', bloco, re.IGNORECASE)

@@ -17,7 +17,7 @@ def extrair_dados_pdf(pdf_file):
     colunas = [
         "FUNCIONÁRIO", "CARGO", "ATIVIDADE", "SALARIO BASE", "SALARIO LIQUIDO", 
         "BASE INSS PATRONAL", "BASE INSS", "INSS DESCON", 
-        "SALARIOFAMILIA", "BASE FGTS", "FGTS DESCON"
+        "SALARIOFAMILIA", "BASE FGTS", "FGTS DESCON", "IMPOSTO DE RENDA"
     ]
     
     dados_extraidos = []
@@ -60,7 +60,7 @@ def extrair_dados_pdf(pdf_file):
                             linha["FUNCIONÁRIO"] = nome_completo
                             linha["CARGO"] = ""
                 # Atividade
-                from utils.extracao_campos import extrair_atividade
+                from utils.extracao_campos import extrair_atividade, extrair_imposto_renda
                 linha["ATIVIDADE"] = extrair_atividade(bloco)
                 # Salário Base
                 linha["SALARIO BASE"] = extrair_salario_base(bloco)
@@ -72,6 +72,8 @@ def extrair_dados_pdf(pdf_file):
                 totais = extrair_totais(bloco)
                 for k, v in totais.items():
                     linha[k] = v
+                # Imposto de Renda
+                linha["IMPOSTO DE RENDA"] = extrair_imposto_renda(bloco)
                 dados_extraidos.append(linha)
     return pd.DataFrame(dados_extraidos, columns=colunas)
 
