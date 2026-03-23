@@ -5,7 +5,7 @@ import pdfplumber
 import io
 import re
 from utils.tratamento_excecao import tratar_nome_cargo_excecao
-from utils.extracao_campos import extrair_salario_base, extrair_inss_desc, extrair_salario_familia, extrair_totais, extrair_plano_saude
+from utils.extracao_campos import extrair_salario_base, extrair_inss_desc, extrair_salario_familia, extrair_totais, extrair_plano_saude, extrair_plano_odontologico
 
 # --- 1. CONFIGURAÇÃO DA INTERFACE ---
 st.set_page_config(page_title="Extrator de Folha de Pagamento", page_icon="📄", layout="centered")
@@ -17,7 +17,7 @@ def extrair_dados_pdf(pdf_file):
     colunas = [
         "FUNCIONÁRIO", "CARGO", "ATIVIDADE", "SALARIO BASE", "SALARIO LIQUIDO", 
         "BASE INSS PATRONAL", "BASE INSS", "INSS DESCON", 
-        "SALARIOFAMILIA", "BASE FGTS", "FGTS DESCON", "IMPOSTO DE RENDA", "DESC VALE TRANSPORTE", "PLANO DE SAÚDE", "INSS 13º", "INSS SOBRE FÉRIAS"
+        "SALARIOFAMILIA", "BASE FGTS", "FGTS DESCON", "IMPOSTO DE RENDA", "DESC VALE TRANSPORTE", "PLANO DE SAÚDE", "PLANO ODONTOLÓGICO", "INSS 13º", "INSS SOBRE FÉRIAS"
     ]
     
     dados_extraidos = []
@@ -67,6 +67,7 @@ def extrair_dados_pdf(pdf_file):
                 linha["INSS SOBRE FÉRIAS"] = extrair_inss_ferias(bloco)
                 linha["INSS 13º"] = extrair_inss_13(bloco)
                 linha["PLANO DE SAÚDE"] = extrair_plano_saude(bloco)
+                linha["PLANO ODONTOLÓGICO"] = extrair_plano_odontologico(bloco)
                 # Desconto de Vale Transporte
                 linha["DESC VALE TRANSPORTE"] = extrair_desc_vt(bloco)
                 linha["ATIVIDADE"] = extrair_atividade(bloco)

@@ -22,6 +22,13 @@ def extrair_plano_saude(bloco):
     valor_total = valor_titular + valor_dependente
     return f"{valor_total:,.2f}".replace(',', '#').replace('.', ',').replace('#', '.') if valor_total else "0"
 
+
+def extrair_plano_odontologico(bloco):
+    valor_titular = _extrair_valor_evento(bloco, r'Plano Odontol[óo]gico Titular\s*([\d\.,]+)')
+    valor_dependente = _extrair_valor_evento(bloco, r'Plano Odontol[óo]gico Dependente\s*([\d\.,]+)')
+    valor_total = valor_titular + valor_dependente
+    return f"{valor_total:,.2f}".replace(',', '#').replace('.', ',').replace('#', '.') if valor_total else "0"
+
 def extrair_inss_ferias(bloco):
     # Procura por "INSS Sobre Férias" seguido de valor
     match = re.search(r'INSS Sobre F[ée]rias\s*([\d\.,]+)', bloco, re.IGNORECASE)
