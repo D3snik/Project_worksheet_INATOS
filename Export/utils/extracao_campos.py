@@ -1,5 +1,33 @@
 import re
 
+def extrair_inss_ferias(bloco):
+    # Procura por "INSS Sobre Férias" seguido de valor
+    match = re.search(r'INSS Sobre F[ée]rias\s*([\d\.,]+)', bloco, re.IGNORECASE)
+    if match:
+        valor = match.group(1).replace('.', '').replace(',', '.')
+        try:
+            valor_float = float(valor)
+            if valor_float < 0:
+                return "0"
+            return str(match.group(1))
+        except Exception:
+            return match.group(1)
+    return "0"
+
+def extrair_inss_13(bloco):
+    # Procura por "INSS 13º" seguido de valor
+    match = re.search(r'INSS 13.?\s*([\d\.,]+)', bloco, re.IGNORECASE)
+    if match:
+        valor = match.group(1).replace('.', '').replace(',', '.')
+        try:
+            valor_float = float(valor)
+            if valor_float < 0:
+                return "0"
+            return str(match.group(1))
+        except Exception:
+            return match.group(1)
+    return "0"
+
 def extrair_desc_vt(bloco):
     # Procura por "Desconto de Vale Transporte (valor)" seguido de valor
     match = re.search(r'Desconto de Vale Transporte \(valor\)\s*([\d\.,]+)', bloco, re.IGNORECASE)

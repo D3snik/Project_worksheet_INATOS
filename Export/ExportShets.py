@@ -17,7 +17,7 @@ def extrair_dados_pdf(pdf_file):
     colunas = [
         "FUNCIONÁRIO", "CARGO", "ATIVIDADE", "SALARIO BASE", "SALARIO LIQUIDO", 
         "BASE INSS PATRONAL", "BASE INSS", "INSS DESCON", 
-        "SALARIOFAMILIA", "BASE FGTS", "FGTS DESCON", "IMPOSTO DE RENDA", "DESC VALE TRANSPORTE"
+        "SALARIOFAMILIA", "BASE FGTS", "FGTS DESCON", "IMPOSTO DE RENDA", "DESC VALE TRANSPORTE", "INSS 13º", "INSS SOBRE FÉRIAS"
     ]
     
     dados_extraidos = []
@@ -60,8 +60,12 @@ def extrair_dados_pdf(pdf_file):
                             linha["FUNCIONÁRIO"] = nome_completo
                             linha["CARGO"] = ""
                 # Atividade
-                from utils.extracao_campos import extrair_atividade, extrair_imposto_renda, extrair_desc_vt
-                                # Desconto de Vale Transporte
+                from utils.extracao_campos import extrair_atividade, extrair_imposto_renda, extrair_desc_vt, extrair_inss_13, extrair_inss_ferias
+
+                linha["INSS SOBRE FÉRIAS"] = extrair_inss_ferias(bloco)
+                # INSS 13º
+                linha["INSS 13º"] = extrair_inss_13(bloco)
+                # Desconto de Vale Transporte
                 linha["DESC VALE TRANSPORTE"] = extrair_desc_vt(bloco)
                 linha["ATIVIDADE"] = extrair_atividade(bloco)
                 # Salário Base
