@@ -4,6 +4,8 @@ import pandas as pd
 import pdfplumber
 import io
 import re
+from utils.tratamento_excecao import tratar_nome_cargo_excecao
+from utils.extracao_campos import extrair_salario_base, extrair_inss_desc, extrair_salario_familia, extrair_totais
 
 # --- 1. CONFIGURAÇÃO DA INTERFACE ---
 st.set_page_config(page_title="Extrator de Folha de Pagamento", page_icon="📄", layout="centered")
@@ -24,8 +26,8 @@ def extrair_dados_pdf(pdf_file):
         for pagina in pdf.pages:
             texto = pagina.extract_text()
             # DEBUG: Visualizar texto extraído do PDF
-            # if texto:
-            #     st.text_area("Texto extraído da página", texto, height=300)
+            if texto:
+                st.text_area("Texto extraído da página", texto, height=300)
             if not texto:
                 continue
             # Divide por funcionário (matrícula - nome)
@@ -41,13 +43,10 @@ def extrair_dados_pdf(pdf_file):
                 cargos_possiveis = CARGOS_POSSIVEIS
                 if match_func:
                     nome_completo = match_func.group(2).strip()
-                    # Tratamento de exceção para os dois nomes bugados
-                    if "ANA CAROLINA RODRIGUES DE MATTOS PEREIRJ" in nome_completo:
-                        linha["FUNCIONÁRIO"] = "ANA CAROLINA RODRIGUES DE MATTOS PEREIRA"
-                        linha["CARGO"] = "JOVEM APRENDIZ (AUX DE OPERAÇÕES EM TRANSPORTE)"
-                    elif "MARIA FERNANDA DE OLIVEIRA VASCONCELOS BJOARVEBMOS" in nome_completo:
-                        linha["FUNCIONÁRIO"] = "MARIA FERNANDA DE OLIVEIRA VASCONCELOS"
-                        linha["CARGO"] = "JOVEM APRENDIZ (AUX DE OPERAÇÕES EM TRANSPORTE)"
+                    nome_corrigido, cargo_corrigido = tratar_nome_cargo_excecao(nome_completo)
+                    if nome_corrigido and cargo_corrigido:
+                        linha["FUNCIONÁRIO"] = nome_corrigido
+                        linha["CARGO"] = cargo_corrigido
                     else:
                         cargo_encontrado = None
                         for cargo in cargos_possiveis:
@@ -61,36 +60,15 @@ def extrair_dados_pdf(pdf_file):
                             linha["FUNCIONÁRIO"] = nome_completo
                             linha["CARGO"] = ""
                 # Salário Base
-                match_base = re.search(r'Salário Base\s*([\d\.,]+)', bloco)
-                if match_base:
-                    linha["SALARIO BASE"] = match_base.group(1)
+                linha["SALARIO BASE"] = extrair_salario_base(bloco)
                 # INSS Desconto
-                match_inss_desc = re.search(r'INSS\s*([\d\.,]+)', bloco)
-                if match_inss_desc:
-                    linha["INSS DESCON"] = match_inss_desc.group(1)
+                linha["INSS DESCON"] = extrair_inss_desc(bloco)
                 # Salário Família
-                match_familia = re.search(r'Salário Familia\s*([\d\.,]+)', bloco)
-                if match_familia:
-                    linha["SALARIOFAMILIA"] = match_familia.group(1)
+                linha["SALARIOFAMILIA"] = extrair_salario_familia(bloco)
                 # Linha de totais (Salário Líquido, Base INSS, etc)
-                match_totais = re.search(r'Salário Líquido\s*Base INSS\s*Base INSS Patronal\s*Base IRRF\s*Base FGTS\s*Valor FGTS\s*([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)', bloco)
-                if match_totais:
-                    linha["SALARIO LIQUIDO"] = match_totais.group(1)
-                    linha["BASE INSS"] = match_totais.group(2)
-                    linha["BASE INSS PATRONAL"] = match_totais.group(3)
-                    # O campo 4 é Base IRRF (não usado)
-                    linha["BASE FGTS"] = match_totais.group(5)
-                    linha["FGTS DESCON"] = match_totais.group(6)
-                else:
-                    # Alternativa: linha de totais sem cabeçalho
-                    match_totais2 = re.search(r'\n([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\s+([\d\.,]+)\n', bloco)
-                    if match_totais2:
-                        linha["SALARIO LIQUIDO"] = match_totais2.group(1)
-                        linha["BASE INSS"] = match_totais2.group(2)
-                        linha["BASE INSS PATRONAL"] = match_totais2.group(3)
-                        # O campo 4 é Base IRRF (não usado)
-                        linha["BASE FGTS"] = match_totais2.group(5)
-                        linha["FGTS DESCON"] = match_totais2.group(6)
+                totais = extrair_totais(bloco)
+                for k, v in totais.items():
+                    linha[k] = v
                 dados_extraidos.append(linha)
     return pd.DataFrame(dados_extraidos, columns=colunas)
 
