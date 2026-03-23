@@ -42,13 +42,16 @@ def extrair_dados_pdf(pdf_file):
                 if match_func:
                     nome_completo = match_func.group(2).strip()
                     cargo_encontrado = None
+                    pos_cargo = -1
                     for cargo in cargos_possiveis:
-                        if nome_completo.endswith(cargo):
-                            cargo_encontrado = cargo
-                            break
+                        idx = nome_completo.find(cargo)
+                        if idx != -1:
+                            if pos_cargo == -1 or idx < pos_cargo:
+                                cargo_encontrado = cargo
+                                pos_cargo = idx
                     if cargo_encontrado:
                         linha["CARGO"] = cargo_encontrado
-                        linha["FUNCIONÁRIO"] = nome_completo[:-len(cargo_encontrado)].strip()
+                        linha["FUNCIONÁRIO"] = nome_completo[:pos_cargo].strip()
                     else:
                         linha["FUNCIONÁRIO"] = nome_completo
                         linha["CARGO"] = ""
