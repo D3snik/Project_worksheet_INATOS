@@ -17,16 +17,17 @@ def extrair_inss_ferias(bloco):
 def extrair_inss_13(bloco):
     # Procura por linha que contenha apenas "INSS 13" (com ou sem º), seguido de valor
     # Procura por linha que contenha explicitamente 'INSS 13º' (com ou sem º)
-    match = re.search(r'^\s*INSS\s+13\s*º?\s+([\d\.,]+)', bloco, re.IGNORECASE | re.MULTILINE)
-    if match:
-        valor = match.group(1).replace('.', '').replace(',', '.')
+    # Busca todas as ocorrências de 'INSS 13º' (com ou sem º, com espaços opcionais)
+    matches = re.findall(r'^\s*INSS\s+13\s*º?\s+([\d\.,]+)', bloco, re.IGNORECASE | re.MULTILINE)
+    if matches:
+        valor = matches[-1].replace('.', '').replace(',', '.')
         try:
             valor_float = float(valor)
             if valor_float < 0:
                 return "0"
-            return match.group(1)
+            return matches[-1]
         except Exception:
-            return match.group(1)
+            return matches[-1]
     return "0"
 
 def extrair_desc_vt(bloco):
