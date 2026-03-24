@@ -24,93 +24,94 @@ def _estilos_base():
 
 def _estilos_header():
     return """
-        .topbar-row-marker + div[data-testid="stHorizontalBlock"] {
+        .app-header {
+            display: flex;
             align-items: center;
-            gap: 0.2rem;
+            gap: 3rem;
+            padding: 0.15rem 0 0.95rem 0;
             margin: -0.15rem 0 1.35rem 0;
-            padding: 0 0 0.95rem 0;
             border-bottom: 1px solid rgba(22, 22, 22, 0.12);
         }
 
-        .header-brand-visual {
+        .brand-link {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .brand-word {
             color: #101010;
             font-size: 2.15rem;
             font-weight: 900;
             letter-spacing: -0.06em;
             line-height: 1;
-            white-space: nowrap;
             font-family: Georgia, "Times New Roman", serif;
         }
 
-        .header-brand-visual span {
+        .brand-accent {
             color: #e53935;
+            font-size: 2.15rem;
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            line-height: 1;
+            font-family: Georgia, "Times New Roman", serif;
         }
 
-        .header-link-visual {
-            display: inline-block;
+        .brand-link:hover,
+        .brand-link:visited,
+        .brand-link:active {
+            text-decoration: none;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 2.4rem;
+        }
+
+        .header-link {
+            display: inline-flex;
+            align-items: center;
             color: #151515;
-            font-size: 1rem;
+            font-size: 0.98rem;
             font-weight: 800;
-            letter-spacing: 0.01em;
-            line-height: 1.2;
-            padding: 0.45rem 0 0.2rem 0;
+            letter-spacing: 0.04em;
+            line-height: 1;
+            padding: 0.5rem 0 0.35rem 0;
             white-space: nowrap;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
         }
 
-        .header-link-visual.is-active {
+        .header-link:visited,
+        .header-link:active {
             color: #151515;
-            box-shadow: inset 0 -2px 0 #e53935;
+            text-decoration: none;
         }
 
-        .brand-click-marker + div[data-testid="stButton"],
-        .header-click-marker + div[data-testid="stButton"] {
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            height: 0;
+        .header-link.is-active {
+            color: #151515;
+            border-bottom-color: #e53935;
         }
 
-        .brand-click-marker + div[data-testid="stButton"] {
-            margin-top: -2.6rem;
+        .header-link:hover {
+            color: #151515;
+            text-decoration: none;
+            border-bottom-color: #e53935;
         }
 
-        .header-click-marker + div[data-testid="stButton"] {
-            margin-top: -2rem;
-        }
+        @media (max-width: 860px) {
+            .app-header {
+                flex-wrap: wrap;
+                gap: 1rem 1.5rem;
+            }
 
-        .brand-click-marker + div[data-testid="stButton"] > button,
-        .header-click-marker + div[data-testid="stButton"] > button {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            color: transparent !important;
-            padding: 0 !important;
-        }
-
-        .brand-click-marker + div[data-testid="stButton"] > button {
-            min-height: 2.5rem !important;
-            height: 2.5rem !important;
-        }
-
-        .header-click-marker + div[data-testid="stButton"] > button {
-            min-height: 2.1rem !important;
-            height: 2.1rem !important;
-        }
-
-        .brand-click-marker + div[data-testid="stButton"] > button:hover,
-        .header-click-marker + div[data-testid="stButton"] > button:hover {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            transform: none !important;
-        }
-
-        .brand-click-marker + div[data-testid="stButton"] > button p,
-        .header-click-marker + div[data-testid="stButton"] > button p {
-            display: none !important;
+            .header-nav {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+            }
         }
     """
 
@@ -147,42 +148,23 @@ def _estilos_home():
             transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
         }
 
-        .tool-card:hover {
+        .tool-card-link {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .tool-card-link:visited,
+        .tool-card-link:hover,
+        .tool-card-link:active {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .tool-card-link:hover .tool-card {
             border-color: #1b1b1b;
             box-shadow: 0 0 0 1px #1b1b1b;
             transform: translateY(-1px);
-        }
-
-        .card-click-marker + div[data-testid="stButton"] {
-            margin-top: -250px;
-            height: 0;
-            position: relative;
-            z-index: 3;
-            width: 100%;
-        }
-
-        .card-click-marker + div[data-testid="stButton"] > button {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 250px;
-            min-height: 250px;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            color: transparent !important;
-            padding: 0;
-        }
-
-        .card-click-marker + div[data-testid="stButton"] > button:hover {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            transform: none;
-        }
-
-        .card-click-marker + div[data-testid="stButton"] > button p {
-            display: none !important;
         }
 
         .tool-icon-wrap {
