@@ -100,23 +100,6 @@ def render_estilos():
             margin: 0 auto;
         }
 
-        .section-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin: 1.8rem 0 2rem 0;
-        }
-
-        .section-tab {
-            border-radius: 999px;
-            padding: 0.7rem 1rem;
-            border: 1px solid rgba(36, 36, 36, 0.10);
-            background: rgba(255, 255, 255, 0.72);
-            color: #444;
-            font-weight: 600;
-        }
-
         .tool-card {
             background: #ffffff;
             border: 1px solid #d8d8e0;

@@ -62,12 +62,6 @@ def render_topo(ferramenta_ativa: str):
             <h1>Ferramentas internas para documentos e rotinas do RH</h1>
             <p>Uma interface única para concentrar extração de folha, notas e novos módulos futuros, com navegação simples e visual mais organizado.</p>
         </div>
-        <div class="section-tabs">
-            <div class="section-tab">Todas</div>
-            <div class="section-tab">Folha de pagamento</div>
-            <div class="section-tab">Documentos</div>
-            <div class="section-tab">Notas</div>
-        </div>
         """,
         unsafe_allow_html=True,
     )
