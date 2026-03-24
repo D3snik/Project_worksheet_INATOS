@@ -18,8 +18,10 @@ def inicializar_navegacao():
 
 
 def render_topo(ferramenta_ativa: str):
+    st.markdown('<div class="topbar-row-marker"></div>', unsafe_allow_html=True)
     col_brand, col_folha, col_notas, col_espaco = st.columns([2.4, 1.7, 1.0, 5.0])
     with col_brand:
+        st.markdown('<div class="brand-button-marker"></div>', unsafe_allow_html=True)
         if st.button(
             "CentralPDF",
             key="nav_brand",
@@ -27,6 +29,7 @@ def render_topo(ferramenta_ativa: str):
         ):
             navegar_para("home")
     with col_folha:
+        st.markdown('<div class="header-link-marker"></div>', unsafe_allow_html=True)
         if st.button(
             "Extração de Folha",
             key="nav_folha",
@@ -34,6 +37,7 @@ def render_topo(ferramenta_ativa: str):
         ):
             navegar_para("folha")
     with col_notas:
+        st.markdown('<div class="header-link-marker"></div>', unsafe_allow_html=True)
         if st.button(
             "Notas",
             key="nav_notas",
@@ -74,6 +78,7 @@ def render_cards():
             """,
             unsafe_allow_html=True,
         )
+        st.markdown('<div class="card-click-marker"></div>', unsafe_allow_html=True)
         if st.button("Abrir extração de folha", key="card_folha", use_container_width=True, type="tertiary"):
             navegar_para("folha")
 
@@ -92,5 +97,6 @@ def render_cards():
             """,
             unsafe_allow_html=True,
         )
+        st.markdown('<div class="card-click-marker"></div>', unsafe_allow_html=True)
         if st.button("Abrir notas", key="card_notas", use_container_width=True, type="tertiary"):
             navegar_para("notas")

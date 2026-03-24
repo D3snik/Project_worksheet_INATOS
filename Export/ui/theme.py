@@ -5,10 +5,8 @@ def configurar_pagina():
     st.set_page_config(page_title="Central PDF", page_icon="📄", layout="wide")
 
 
-def render_estilos():
-    st.markdown(
-        """
-        <style>
+def _estilos_base():
+    return """
         .stApp {
             background:
                 radial-gradient(circle at top left, rgba(250, 99, 71, 0.10), transparent 26%),
@@ -21,8 +19,12 @@ def render_estilos():
             padding-bottom: 3rem;
             max-width: 1200px;
         }
+    """
 
-        div[data-testid="stHorizontalBlock"]:has(button[key="nav_brand"]) {
+
+def _estilos_header():
+    return """
+        .topbar-row-marker + div[data-testid="stHorizontalBlock"] {
             align-items: center;
             gap: 0.25rem;
             margin: 0 0 1.5rem 0;
@@ -30,42 +32,12 @@ def render_estilos():
             border-bottom: 1px solid rgba(31, 31, 31, 0.10);
         }
 
-        .stButton {
-            width: 100%;
-        }
-
-        .stButton > button {
-            border-radius: 18px;
-            border: 1px solid rgba(31, 31, 31, 0.12);
-            min-height: 3rem;
-            font-weight: 700;
-            transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-        }
-
-        .stButton > button[kind="secondary"] {
-            background: rgba(255, 255, 255, 0.78);
-            color: #2f2f2f;
-        }
-
-        .stButton > button[kind="primary"] {
-            background: #1f1f1f;
-            border-color: #1f1f1f;
-            color: #ffffff;
-        }
-
-        .stButton > button:hover {
-            border-color: #1f1f1f;
-            box-shadow: 0 0 0 1px rgba(31, 31, 31, 0.06);
-            transform: translateY(-1px);
-        }
-
-        div[data-testid="stButton"]:has(> button[key="nav_brand"]),
-        div[data-testid="stButton"]:has(> button[key="nav_folha"]),
-        div[data-testid="stButton"]:has(> button[key="nav_notas"]) {
+        .brand-button-marker + div[data-testid="stButton"],
+        .header-link-marker + div[data-testid="stButton"] {
             width: auto;
         }
 
-        button[key="nav_brand"] {
+        .brand-button-marker + div[data-testid="stButton"] > button {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
@@ -78,21 +50,20 @@ def render_estilos():
             justify-content: flex-start !important;
         }
 
-        button[key="nav_brand"] p {
+        .brand-button-marker + div[data-testid="stButton"] > button p {
             font-size: 2.05rem !important;
             font-weight: 900 !important;
             line-height: 1 !important;
         }
 
-        button[key="nav_brand"]:hover {
+        .brand-button-marker + div[data-testid="stButton"] > button:hover {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
             transform: none !important;
         }
 
-        button[key="nav_folha"],
-        button[key="nav_notas"] {
+        .header-link-marker + div[data-testid="stButton"] > button {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
@@ -106,27 +77,28 @@ def render_estilos():
             border-radius: 0 !important;
         }
 
-        button[key="nav_folha"] p,
-        button[key="nav_notas"] p {
+        .header-link-marker + div[data-testid="stButton"] > button p {
             font-size: 1rem !important;
             font-weight: 800 !important;
         }
 
-        button[key="nav_folha"][kind="primary"],
-        button[key="nav_notas"][kind="primary"] {
+        .header-link-marker + div[data-testid="stButton"] > button[kind="primary"] {
             color: #e24d37 !important;
             box-shadow: inset 0 -2px 0 #e24d37 !important;
         }
 
-        button[key="nav_folha"]:hover,
-        button[key="nav_notas"]:hover {
+        .header-link-marker + div[data-testid="stButton"] > button:hover {
             background: transparent !important;
             border: none !important;
-            box-shadow: none !important;
+            box-shadow: inset 0 -2px 0 #e24d37 !important;
             transform: none !important;
             color: #e24d37 !important;
         }
+    """
 
+
+def _estilos_home():
+    return """
         .hero {
             text-align: center;
             padding: 2rem 0 1.6rem 0;
@@ -163,14 +135,15 @@ def render_estilos():
             transform: translateY(-1px);
         }
 
-        div[data-testid="stButton"]:has(> button[kind="tertiary"]) {
+        .card-click-marker + div[data-testid="stButton"] {
             margin-top: -250px;
             height: 0;
             position: relative;
             z-index: 3;
+            width: 100%;
         }
 
-        div[data-testid="stButton"]:has(> button[kind="tertiary"]) > button {
+        .card-click-marker + div[data-testid="stButton"] > button {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -183,14 +156,14 @@ def render_estilos():
             padding: 0;
         }
 
-        div[data-testid="stButton"]:has(> button[kind="tertiary"]) > button:hover {
+        .card-click-marker + div[data-testid="stButton"] > button:hover {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
             transform: none;
         }
 
-        div[data-testid="stButton"]:has(> button[kind="tertiary"]) > button p {
+        .card-click-marker + div[data-testid="stButton"] > button p {
             display: none !important;
         }
 
@@ -239,7 +212,11 @@ def render_estilos():
             line-height: 1.45;
             margin-bottom: 0;
         }
+    """
 
+
+def _estilos_modulos():
+    return """
         .panel {
             background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(36, 36, 36, 0.08);
@@ -375,6 +352,23 @@ def render_estilos():
         .result-shell {
             margin-top: 2rem;
         }
+    """
+
+
+def render_estilos():
+    css = "\n".join(
+        [
+            _estilos_base(),
+            _estilos_header(),
+            _estilos_home(),
+            _estilos_modulos(),
+        ]
+    )
+
+    st.markdown(
+        f"""
+        <style>
+        {css}
         </style>
         """,
         unsafe_allow_html=True,
