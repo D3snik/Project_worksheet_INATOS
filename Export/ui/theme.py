@@ -47,33 +47,37 @@ def render_estilos():
             justify-content: flex-end;
         }
 
-        .navpill {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(31, 31, 31, 0.08);
-            border-radius: 999px;
-            color: #363636;
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 0.55rem 0.95rem;
-            text-decoration: none;
-            transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+        div[data-testid="stHorizontalBlock"]:has(button[key="nav_home"]) {
+            margin: 0 0 1.2rem 0;
         }
 
-        .navpill:hover {
-            border-color: rgba(31, 31, 31, 0.22);
-            color: #1f1f1f;
+        .stButton {
+            width: 100%;
         }
 
-        .navpill-active {
+        .stButton > button {
+            border-radius: 18px;
+            border: 1px solid rgba(31, 31, 31, 0.12);
+            min-height: 3rem;
+            font-weight: 700;
+            transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+        }
+
+        .stButton > button[kind="secondary"] {
+            background: rgba(255, 255, 255, 0.78);
+            color: #2f2f2f;
+        }
+
+        .stButton > button[kind="primary"] {
             background: #1f1f1f;
             border-color: #1f1f1f;
             color: #ffffff;
         }
 
-        .navpill-active:hover {
-            color: #ffffff;
+        .stButton > button:hover {
+            border-color: #1f1f1f;
+            box-shadow: 0 0 0 1px rgba(31, 31, 31, 0.06);
+            transform: translateY(-1px);
         }
 
         .hero {
@@ -129,21 +133,15 @@ def render_estilos():
             transform: translateY(-1px);
         }
 
-        .tool-card-link {
-            text-decoration: none !important;
-            display: block;
-            color: inherit !important;
-        }
-
-        .tool-card-link:hover {
-            text-decoration: none !important;
-        }
-
         .tool-icon-wrap {
             width: 74px;
             height: 74px;
             position: relative;
             margin-bottom: 1.1rem;
+        }
+
+        .tool-card + div[data-testid="stButton"] {
+            margin-top: 0.85rem;
         }
 
         .tool-icon-default {
