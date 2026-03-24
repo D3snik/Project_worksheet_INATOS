@@ -133,15 +133,42 @@ def render_estilos():
             transform: translateY(-1px);
         }
 
+        .tool-card + div[data-testid="stButton"] {
+            margin-top: -250px;
+            height: 250px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .tool-card + div[data-testid="stButton"] > button {
+            width: 100%;
+            height: 250px;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            color: transparent !important;
+            padding: 0;
+        }
+
+        .tool-card + div[data-testid="stButton"] > button:hover {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            transform: none;
+        }
+
+        .tool-card + div[data-testid="stButton"] > button p {
+            color: transparent !important;
+            font-size: 0 !important;
+            line-height: 0 !important;
+            margin: 0 !important;
+        }
+
         .tool-icon-wrap {
             width: 74px;
             height: 74px;
             position: relative;
             margin-bottom: 1.1rem;
-        }
-
-        .tool-card + div[data-testid="stButton"] {
-            margin-top: 0.85rem;
         }
 
         .tool-icon-default {
