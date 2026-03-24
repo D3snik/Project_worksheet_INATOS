@@ -50,6 +50,12 @@ def _estilos_header():
             justify-content: flex-start !important;
         }
 
+        .brand-button-marker + div[data-testid="stButton"] > button,
+        .brand-button-marker + div[data-testid="stButton"] > button * {
+            color: #161616 !important;
+            fill: #161616 !important;
+        }
+
         .brand-button-marker + div[data-testid="stButton"] > button p {
             font-size: 2.05rem !important;
             font-weight: 900 !important;
@@ -77,6 +83,12 @@ def _estilos_header():
             border-radius: 0 !important;
         }
 
+        .header-link-marker + div[data-testid="stButton"] > button,
+        .header-link-marker + div[data-testid="stButton"] > button * {
+            color: #202020 !important;
+            fill: #202020 !important;
+        }
+
         .header-link-marker + div[data-testid="stButton"] > button p {
             font-size: 1rem !important;
             font-weight: 800 !important;
@@ -85,6 +97,12 @@ def _estilos_header():
         .header-link-marker.header-link-active + div[data-testid="stButton"] > button {
             color: #e24d37 !important;
             box-shadow: inset 0 -2px 0 #e24d37 !important;
+        }
+
+        .header-link-marker.header-link-active + div[data-testid="stButton"] > button,
+        .header-link-marker.header-link-active + div[data-testid="stButton"] > button * {
+            color: #e24d37 !important;
+            fill: #e24d37 !important;
         }
 
         .header-link-marker + div[data-testid="stButton"] > button:hover {
