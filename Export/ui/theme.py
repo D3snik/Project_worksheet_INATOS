@@ -276,10 +276,13 @@ def _estilos_modulos():
         div[data-testid="stFileUploader"] {
             max-width: 760px;
             margin: 0 auto;
+            text-align: center;
         }
 
         div[data-testid="stFileUploader"] > div {
-            width: 100%;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
         div[data-testid="stFileUploader"] section,
@@ -288,6 +291,9 @@ def _estilos_modulos():
             display: flex;
             justify-content: center;
             align-items: center;
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
         div[data-testid="stFileUploader"] > label {
@@ -298,12 +304,14 @@ def _estilos_modulos():
             background: transparent;
             border: none;
             padding: 0;
+            width: fit-content;
         }
 
         div[data-testid="stFileUploaderDropzone"] {
             background: transparent;
             border: none;
             padding: 0;
+            width: fit-content;
         }
 
         div[data-testid="stFileUploader"] button {
@@ -312,8 +320,9 @@ def _estilos_modulos():
             border: none;
             border-radius: 14px;
             min-height: 82px;
-            width: 100%;
-            max-width: 420px;
+            min-width: 260px;
+            width: auto;
+            max-width: none;
             padding: 1rem 2.4rem;
             font-size: 1.55rem;
             font-weight: 800;
