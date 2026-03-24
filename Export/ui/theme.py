@@ -133,16 +133,19 @@ def render_estilos():
             transform: translateY(-1px);
         }
 
-        .tool-card + div[data-testid="stButton"] {
+        div[data-testid="stButton"]:has(> button[kind="tertiary"]) {
             margin-top: -250px;
-            height: 250px;
+            height: 0;
             position: relative;
             z-index: 3;
         }
 
-        .tool-card + div[data-testid="stButton"] > button {
+        div[data-testid="stButton"]:has(> button[kind="tertiary"]) > button {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 250px;
+            min-height: 250px;
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
@@ -150,18 +153,15 @@ def render_estilos():
             padding: 0;
         }
 
-        .tool-card + div[data-testid="stButton"] > button:hover {
+        div[data-testid="stButton"]:has(> button[kind="tertiary"]) > button:hover {
             background: transparent !important;
             border: none !important;
             box-shadow: none !important;
             transform: none;
         }
 
-        .tool-card + div[data-testid="stButton"] > button p {
-            color: transparent !important;
-            font-size: 0 !important;
-            line-height: 0 !important;
-            margin: 0 !important;
+        div[data-testid="stButton"]:has(> button[kind="tertiary"]) > button p {
+            display: none !important;
         }
 
         .tool-icon-wrap {

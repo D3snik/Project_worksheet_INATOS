@@ -90,7 +90,7 @@ def render_cards():
             """,
             unsafe_allow_html=True,
         )
-        if st.button("Abrir extração de folha", key="card_folha", use_container_width=True):
+        if st.button("Abrir extração de folha", key="card_folha", use_container_width=True, type="tertiary"):
             navegar_para("folha")
 
     with col2:
@@ -108,5 +108,5 @@ def render_cards():
             """,
             unsafe_allow_html=True,
         )
-        if st.button("Abrir notas", key="card_notas", use_container_width=True):
+        if st.button("Abrir notas", key="card_notas", use_container_width=True, type="tertiary"):
             navegar_para("notas")
