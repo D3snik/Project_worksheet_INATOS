@@ -18,40 +18,30 @@ def inicializar_navegacao():
 
 
 def render_topo(ferramenta_ativa: str):
-    st.markdown(
-        """
-        <div class="topbar">
-            <div class="brand">Central<span>PDF</span></div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    col_home, col_folha, col_notas = st.columns([1, 1, 1])
-    with col_home:
+    col_brand, col_folha, col_notas, col_espaco = st.columns([2.4, 1.7, 1.0, 5.0])
+    with col_brand:
         if st.button(
-            "Visão geral",
-            key="nav_home",
-            use_container_width=True,
-            type="primary" if ferramenta_ativa == "home" else "secondary",
+            "CentralPDF",
+            key="nav_brand",
+            type="tertiary",
         ):
             navegar_para("home")
     with col_folha:
         if st.button(
             "Extração de Folha",
             key="nav_folha",
-            use_container_width=True,
-            type="primary" if ferramenta_ativa == "folha" else "secondary",
+            type="primary" if ferramenta_ativa == "folha" else "tertiary",
         ):
             navegar_para("folha")
     with col_notas:
         if st.button(
             "Notas",
             key="nav_notas",
-            use_container_width=True,
-            type="primary" if ferramenta_ativa == "notas" else "secondary",
+            type="primary" if ferramenta_ativa == "notas" else "tertiary",
         ):
             navegar_para("notas")
+    with col_espaco:
+        st.empty()
 
     if ferramenta_ativa != "home":
         return

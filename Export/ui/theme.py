@@ -22,33 +22,12 @@ def render_estilos():
             max-width: 1200px;
         }
 
-        .topbar {
-            display: flex;
+        div[data-testid="stHorizontalBlock"]:has(button[key="nav_brand"]) {
             align-items: center;
-            justify-content: space-between;
-            padding: 0.4rem 0 1.2rem 0;
-        }
-
-        .brand {
-            font-size: 2.1rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            color: #1f1f1f;
-        }
-
-        .brand span {
-            color: #e24d37;
-        }
-
-        .topnav {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        div[data-testid="stHorizontalBlock"]:has(button[key="nav_home"]) {
-            margin: 0 0 1.2rem 0;
+            gap: 0.25rem;
+            margin: 0 0 1.5rem 0;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid rgba(31, 31, 31, 0.10);
         }
 
         .stButton {
@@ -78,6 +57,74 @@ def render_estilos():
             border-color: #1f1f1f;
             box-shadow: 0 0 0 1px rgba(31, 31, 31, 0.06);
             transform: translateY(-1px);
+        }
+
+        div[data-testid="stButton"]:has(> button[key="nav_brand"]),
+        div[data-testid="stButton"]:has(> button[key="nav_folha"]),
+        div[data-testid="stButton"]:has(> button[key="nav_notas"]) {
+            width: auto;
+        }
+
+        button[key="nav_brand"] {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            color: #161616 !important;
+            font-size: 2.05rem !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.05em;
+            min-height: auto !important;
+            padding: 0 !important;
+            justify-content: flex-start !important;
+        }
+
+        button[key="nav_brand"] p {
+            font-size: 2.05rem !important;
+            font-weight: 900 !important;
+            line-height: 1 !important;
+        }
+
+        button[key="nav_brand"]:hover {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        button[key="nav_folha"],
+        button[key="nav_notas"] {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            color: #202020 !important;
+            font-size: 1rem !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.01em;
+            min-height: auto !important;
+            padding: 0.15rem 0 !important;
+            justify-content: flex-start !important;
+            border-radius: 0 !important;
+        }
+
+        button[key="nav_folha"] p,
+        button[key="nav_notas"] p {
+            font-size: 1rem !important;
+            font-weight: 800 !important;
+        }
+
+        button[key="nav_folha"][kind="primary"],
+        button[key="nav_notas"][kind="primary"] {
+            color: #e24d37 !important;
+            box-shadow: inset 0 -2px 0 #e24d37 !important;
+        }
+
+        button[key="nav_folha"]:hover,
+        button[key="nav_notas"]:hover {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            transform: none !important;
+            color: #e24d37 !important;
         }
 
         .hero {
