@@ -32,85 +32,80 @@ def _estilos_header():
             border-bottom: 1px solid rgba(31, 31, 31, 0.10);
         }
 
-        .brand-button-marker + div[data-testid="stButton"],
-        .header-link-marker + div[data-testid="stButton"] {
-            width: auto;
-        }
-
-        .brand-button-marker + div[data-testid="stButton"] > button {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            color: #161616 !important;
-            font-size: 2.05rem !important;
-            font-weight: 900 !important;
+        .header-brand-visual {
+            color: #161616;
+            font-size: 2.05rem;
+            font-weight: 900;
             letter-spacing: -0.05em;
-            min-height: auto !important;
-            padding: 0 !important;
-            justify-content: flex-start !important;
+            line-height: 1;
+            white-space: nowrap;
         }
 
-        .brand-button-marker + div[data-testid="stButton"] > button,
-        .brand-button-marker + div[data-testid="stButton"] > button * {
-            color: #161616 !important;
-            fill: #161616 !important;
-        }
-
-        .brand-button-marker + div[data-testid="stButton"] > button p {
-            font-size: 2.05rem !important;
-            font-weight: 900 !important;
-            line-height: 1 !important;
-        }
-
-        .brand-button-marker + div[data-testid="stButton"] > button:hover {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            transform: none !important;
-        }
-
-        .header-link-marker + div[data-testid="stButton"] > button {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            color: #202020 !important;
-            font-size: 1rem !important;
-            font-weight: 800 !important;
+        .header-link-visual {
+            display: inline-block;
+            color: #202020;
+            font-size: 1rem;
+            font-weight: 800;
             letter-spacing: -0.01em;
-            min-height: auto !important;
-            padding: 0.15rem 0 !important;
-            justify-content: flex-start !important;
-            border-radius: 0 !important;
+            line-height: 1.2;
+            padding: 0.15rem 0;
+            white-space: nowrap;
         }
 
-        .header-link-marker + div[data-testid="stButton"] > button,
-        .header-link-marker + div[data-testid="stButton"] > button * {
-            color: #202020 !important;
-            fill: #202020 !important;
+        .header-link-visual.is-active {
+            color: #e24d37;
+            box-shadow: inset 0 -2px 0 #e24d37;
         }
 
-        .header-link-marker + div[data-testid="stButton"] > button p {
-            font-size: 1rem !important;
-            font-weight: 800 !important;
+        .brand-click-marker + div[data-testid="stButton"],
+        .header-click-marker + div[data-testid="stButton"] {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            height: 0;
         }
 
-        .header-link-marker.header-link-active + div[data-testid="stButton"] > button {
-            color: #e24d37 !important;
-            box-shadow: inset 0 -2px 0 #e24d37 !important;
+        .brand-click-marker + div[data-testid="stButton"] {
+            margin-top: -2.45rem;
         }
 
-        .header-link-marker.header-link-active + div[data-testid="stButton"] > button,
-        .header-link-marker.header-link-active + div[data-testid="stButton"] > button * {
-            color: #e24d37 !important;
-            fill: #e24d37 !important;
+        .header-click-marker + div[data-testid="stButton"] {
+            margin-top: -1.7rem;
         }
 
-        .header-link-marker + div[data-testid="stButton"] > button:hover {
+        .brand-click-marker + div[data-testid="stButton"] > button,
+        .header-click-marker + div[data-testid="stButton"] > button {
+            position: absolute;
+            inset: 0;
+            width: 100%;
             background: transparent !important;
             border: none !important;
-            box-shadow: inset 0 -2px 0 #e24d37 !important;
+            box-shadow: none !important;
+            color: transparent !important;
+            padding: 0 !important;
+        }
+
+        .brand-click-marker + div[data-testid="stButton"] > button {
+            min-height: 2.5rem !important;
+            height: 2.5rem !important;
+        }
+
+        .header-click-marker + div[data-testid="stButton"] > button {
+            min-height: 1.8rem !important;
+            height: 1.8rem !important;
+        }
+
+        .brand-click-marker + div[data-testid="stButton"] > button:hover,
+        .header-click-marker + div[data-testid="stButton"] > button:hover {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
             transform: none !important;
-            color: #e24d37 !important;
+        }
+
+        .brand-click-marker + div[data-testid="stButton"] > button p,
+        .header-click-marker + div[data-testid="stButton"] > button p {
+            display: none !important;
         }
     """
 
