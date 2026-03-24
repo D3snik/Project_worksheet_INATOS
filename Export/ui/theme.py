@@ -48,12 +48,32 @@ def render_estilos():
         }
 
         .navpill {
+            display: inline-flex;
+            align-items: center;
             background: rgba(255, 255, 255, 0.75);
             border: 1px solid rgba(31, 31, 31, 0.08);
             border-radius: 999px;
             color: #363636;
             font-size: 0.95rem;
+            font-weight: 600;
             padding: 0.55rem 0.95rem;
+            text-decoration: none;
+            transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+        }
+
+        .navpill:hover {
+            border-color: rgba(31, 31, 31, 0.22);
+            color: #1f1f1f;
+        }
+
+        .navpill-active {
+            background: #1f1f1f;
+            border-color: #1f1f1f;
+            color: #ffffff;
+        }
+
+        .navpill-active:hover {
+            color: #ffffff;
         }
 
         .hero {
@@ -190,6 +210,10 @@ def render_estilos():
             padding: 2.6rem 0 0.6rem 0;
         }
 
+        .tool-hero-compact {
+            padding-bottom: 0;
+        }
+
         .tool-hero h1 {
             color: #26324a;
             font-size: 3rem;
@@ -209,20 +233,6 @@ def render_estilos():
             max-width: 760px;
             margin: 1.4rem auto 0 auto;
             text-align: center;
-        }
-
-        .tool-back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            color: #5a6477;
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .tool-back-link:hover {
-            color: #1b1b1b;
         }
 
         .upload-help {

@@ -9,9 +9,9 @@ from ui.theme import configurar_pagina, render_estilos
 configurar_pagina()
 render_estilos()
 inicializar_navegacao()
+render_topo(st.session_state["ferramenta_ativa"])
 
 if st.session_state["ferramenta_ativa"] == "home":
-    render_topo()
     render_cards()
 elif st.session_state["ferramenta_ativa"] == "folha":
     render_modulo_folha()

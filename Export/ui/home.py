@@ -11,17 +11,35 @@ def inicializar_navegacao():
     st.session_state["ferramenta_ativa"] = ferramenta_query
 
 
-def render_topo():
+def render_topo(ferramenta_ativa: str):
+    nav_items = [
+        ("home", "Visão geral"),
+        ("folha", "Extração de Folha"),
+        ("notas", "Notas"),
+    ]
+
+    nav_html = "".join(
+        f'<a class="navpill {"navpill-active" if slug == ferramenta_ativa else ""}" href="?tool={slug}">{label}</a>'
+        for slug, label in nav_items
+    )
+
     st.markdown(
-        """
+        f"""
         <div class="topbar">
             <div class="brand">Central<span>PDF</span></div>
             <div class="topnav">
-                <div class="navpill">Extração de Folha</div>
-                <div class="navpill">Notas</div>
-                <div class="navpill">Expansão futura</div>
+                {nav_html}
             </div>
         </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if ferramenta_ativa != "home":
+        return
+
+    st.markdown(
+        """
         <div class="hero">
             <h1>Ferramentas internas para documentos e rotinas do RH</h1>
             <p>Uma interface única para concentrar extração de folha, notas e novos módulos futuros, com navegação simples e visual mais organizado.</p>

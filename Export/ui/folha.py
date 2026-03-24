@@ -7,9 +7,6 @@ from services.pdf_extractor import extrair_dados_pdf
 def render_modulo_folha():
     st.markdown(
         """
-        <div class="tool-upload-shell">
-            <a class="tool-back-link" href="?tool=home">&#8592; Voltar para ferramentas</a>
-        </div>
         <div class="tool-hero">
             <h1>Extrair folha de pagamento</h1>
             <p>Selecione o PDF da folha para converter os dados em Excel. O arquivo será processado na mesma tela e o download da planilha ficará disponível logo abaixo.</p>
