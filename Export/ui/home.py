@@ -29,19 +29,21 @@ def render_topo(ferramenta_ativa: str):
         ):
             navegar_para("home")
     with col_folha:
-        st.markdown('<div class="header-link-marker"></div>', unsafe_allow_html=True)
+        classe_folha = "header-link-marker header-link-active" if ferramenta_ativa == "folha" else "header-link-marker"
+        st.markdown(f'<div class="{classe_folha}"></div>', unsafe_allow_html=True)
         if st.button(
             "Extração de Folha",
             key="nav_folha",
-            type="primary" if ferramenta_ativa == "folha" else "tertiary",
+            type="tertiary",
         ):
             navegar_para("folha")
     with col_notas:
-        st.markdown('<div class="header-link-marker"></div>', unsafe_allow_html=True)
+        classe_notas = "header-link-marker header-link-active" if ferramenta_ativa == "notas" else "header-link-marker"
+        st.markdown(f'<div class="{classe_notas}"></div>', unsafe_allow_html=True)
         if st.button(
             "Notas",
             key="nav_notas",
-            type="primary" if ferramenta_ativa == "notas" else "tertiary",
+            type="tertiary",
         ):
             navegar_para("notas")
     with col_espaco:

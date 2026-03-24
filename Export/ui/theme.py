@@ -82,7 +82,7 @@ def _estilos_header():
             font-weight: 800 !important;
         }
 
-        .header-link-marker + div[data-testid="stButton"] > button[kind="primary"] {
+        .header-link-marker.header-link-active + div[data-testid="stButton"] > button {
             color: #e24d37 !important;
             box-shadow: inset 0 -2px 0 #e24d37 !important;
         }
