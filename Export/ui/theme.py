@@ -26,35 +26,40 @@ def _estilos_header():
     return """
         .topbar-row-marker + div[data-testid="stHorizontalBlock"] {
             align-items: center;
-            gap: 0.25rem;
-            margin: 0 0 1.5rem 0;
-            padding-bottom: 0.9rem;
-            border-bottom: 1px solid rgba(31, 31, 31, 0.10);
+            gap: 0.2rem;
+            margin: -0.15rem 0 1.35rem 0;
+            padding: 0 0 0.95rem 0;
+            border-bottom: 1px solid rgba(22, 22, 22, 0.12);
         }
 
         .header-brand-visual {
-            color: #161616;
-            font-size: 2.05rem;
+            color: #101010;
+            font-size: 2.15rem;
             font-weight: 900;
-            letter-spacing: -0.05em;
+            letter-spacing: -0.06em;
             line-height: 1;
             white-space: nowrap;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .header-brand-visual span {
+            color: #e53935;
         }
 
         .header-link-visual {
             display: inline-block;
-            color: #202020;
+            color: #151515;
             font-size: 1rem;
             font-weight: 800;
-            letter-spacing: -0.01em;
+            letter-spacing: 0.01em;
             line-height: 1.2;
-            padding: 0.15rem 0;
+            padding: 0.45rem 0 0.2rem 0;
             white-space: nowrap;
         }
 
         .header-link-visual.is-active {
-            color: #e24d37;
-            box-shadow: inset 0 -2px 0 #e24d37;
+            color: #151515;
+            box-shadow: inset 0 -2px 0 #e53935;
         }
 
         .brand-click-marker + div[data-testid="stButton"],
@@ -66,11 +71,11 @@ def _estilos_header():
         }
 
         .brand-click-marker + div[data-testid="stButton"] {
-            margin-top: -2.45rem;
+            margin-top: -2.6rem;
         }
 
         .header-click-marker + div[data-testid="stButton"] {
-            margin-top: -1.7rem;
+            margin-top: -2rem;
         }
 
         .brand-click-marker + div[data-testid="stButton"] > button,
@@ -91,8 +96,8 @@ def _estilos_header():
         }
 
         .header-click-marker + div[data-testid="stButton"] > button {
-            min-height: 1.8rem !important;
-            height: 1.8rem !important;
+            min-height: 2.1rem !important;
+            height: 2.1rem !important;
         }
 
         .brand-click-marker + div[data-testid="stButton"] > button:hover,

@@ -19,9 +19,9 @@ def inicializar_navegacao():
 
 def render_topo(ferramenta_ativa: str):
     st.markdown('<div class="topbar-row-marker"></div>', unsafe_allow_html=True)
-    col_brand, col_folha, col_notas, col_espaco = st.columns([2.4, 1.7, 1.0, 5.0])
+    col_brand, col_folha, col_notas, col_espaco = st.columns([2.6, 2.1, 1.2, 4.1])
     with col_brand:
-        st.markdown('<div class="header-brand-visual">CentralPDF</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header-brand-visual">Central<span>PDF</span></div>', unsafe_allow_html=True)
         st.markdown('<div class="brand-click-marker"></div>', unsafe_allow_html=True)
         if st.button(
             "CentralPDF",
@@ -31,7 +31,7 @@ def render_topo(ferramenta_ativa: str):
             navegar_para("home")
     with col_folha:
         classe_folha = "header-link-visual is-active" if ferramenta_ativa == "folha" else "header-link-visual"
-        st.markdown(f'<div class="{classe_folha}">Extração de Folha</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="{classe_folha}">EXTRAÇÃO DE FOLHA</div>', unsafe_allow_html=True)
         st.markdown('<div class="header-click-marker"></div>', unsafe_allow_html=True)
         if st.button(
             "Extração de Folha",
@@ -41,7 +41,7 @@ def render_topo(ferramenta_ativa: str):
             navegar_para("folha")
     with col_notas:
         classe_notas = "header-link-visual is-active" if ferramenta_ativa == "notas" else "header-link-visual"
-        st.markdown(f'<div class="{classe_notas}">Notas</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="{classe_notas}">NOTAS</div>', unsafe_allow_html=True)
         st.markdown('<div class="header-click-marker"></div>', unsafe_allow_html=True)
         if st.button(
             "Notas",
