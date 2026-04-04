@@ -1,2 +1,11 @@
 start_app.ps1
 Relatório de Folha de Pagamento dos Funcionários_ESCOLA DE LUTA (2).PDF
+
+__pycache__/*
+*.pyc
+NEW_UI/node_modules/
+NEW_UI/dist/
+.env
+.venv
+venv/
+*.log
