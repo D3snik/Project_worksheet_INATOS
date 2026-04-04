@@ -1,8 +1,7 @@
 import { FileText, Receipt, FileSpreadsheet } from 'lucide-react';
 import { useState } from 'react';
 import logo from '../../assets/f267816345d6444779918b0e213ef56871972bde.png';
-
-import ExtracaoFolha from './ExtracaoFolha';
+import ExtracaoFolhaContainer from './ExtracaoFolhaContainer';
 import Notas from './Notas';
 import GlosasContainer from './GlosasContainer';
 
@@ -37,13 +36,13 @@ export default function HomePage() {
 
     switch (activeSection) {
       case 'extracaoFolha':
-        return <ExtracaoFolha onNavigate={dummyNavigate} />;
+        return <ExtracaoFolhaContainer />;
       case 'notas':
         return <Notas onNavigate={dummyNavigate} />;
       case 'glosas':
         return <GlosasContainer />;
       default:
-        return <ExtracaoFolha onNavigate={dummyNavigate} />;
+        return <ExtracaoFolhaContainer />;
     }
   };
 

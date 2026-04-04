@@ -25,7 +25,7 @@ export default function Login({ onLogin, error }: LoginProps) {
             <img src={logo} alt="Inatos Logo" className="h-16 w-auto" />
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">Bem-vindo</h1>
-          <p className="text-sm text-blue-200">Sistema de Gestão Empresarial</p>
+          <p className="text-sm text-blue-200">Sistema de Gestão</p>
         </div>
 
         {/* Login Form */}

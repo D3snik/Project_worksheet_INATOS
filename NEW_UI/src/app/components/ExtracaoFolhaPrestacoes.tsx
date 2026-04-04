@@ -1,12 +1,11 @@
 import { ArrowLeft, Upload, FileText } from 'lucide-react';
 import { useState } from 'react';
-import logo from '../../assets/f267816345d6444779918b0e213ef56871972bde.png';
 
-interface ExtracaoFolhaProps {
+interface ExtracaoFolhaPrestacoes {
   onNavigate: (page: 'home') => void;
 }
 
-export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
+export default function ExtracaoFolhaPrestacoes({ onNavigate }: ExtracaoFolhaPrestacoes) {
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +72,7 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = response.headers.get('Content-Disposition')?.split('filename=')?.[1] || `extracao_geral_${selectedFile.name.replace('.pdf', '')}.xlsx`;
+      a.download = response.headers.get('Content-Disposition')?.split('filename=')?.[1] || `extracao_prestacoes_${selectedFile.name.replace('.pdf', '')}.xlsx`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
@@ -94,7 +93,7 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
         <div className="max-w-3xl mx-auto">
           <div className="mb-8 text-center">
             <h2 className="text-3xl font-bold text-slate-900 mb-2">
-              Extração de Folha Geral
+              Extração de Folha para Prestações
             </h2>
             <p className="text-slate-600">
               Faça upload de um arquivo PDF para processamento
@@ -131,9 +130,9 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
                 accept="application/pdf"
                 onChange={handleFileSelect}
                 className="hidden"
-                id="file-upload"
+                id="file-upload-prestacoes"
               />
-              <label htmlFor="file-upload">
+              <label htmlFor="file-upload-prestacoes">
                 <div className="cursor-pointer inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors">
                   <FileText className="w-4 h-4" />
                   Selecionar Arquivo
@@ -168,7 +167,6 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
             </div>
           </div>
 
-          {/* Mensagem de Erro */}
           {error && (
             <div className="mt-4 p-4 text-red-700 bg-red-100 rounded-lg">
               {error}

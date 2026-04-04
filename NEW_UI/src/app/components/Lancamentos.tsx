@@ -1,6 +1,6 @@
 import { ArrowLeft, Save } from 'lucide-react';
 import { useState } from 'react';
-
+import logo from '../../assets/f267816345d6444779918b0e213ef56871972bde.png';
 
 interface LancamentosProps {
   onNavigate: (page: 'home' | 'dashboard' | 'guiasPrestacao') => void;

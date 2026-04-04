@@ -1,6 +1,6 @@
 import { ArrowLeft, Upload, FileText } from 'lucide-react';
 import { useState } from 'react';
-
+import logo from '../../assets/f267816345d6444779918b0e213ef56871972bde.png';
 
 interface NotasProps {
   onNavigate: (page: 'home') => void;

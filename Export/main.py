@@ -1,4 +1,5 @@
 ﻿import io
+import urllib.parse
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import Response, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -32,11 +33,13 @@ async def extract_folha(file: UploadFile = File(...)):
         if not filename.endswith(".xlsx"):
             filename += ".xlsx"
             
+        encoded_filename = urllib.parse.quote(filename)
+
         return Response(
             content=excel_data,
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            headers={"Content-Disposition": f"attachment; filename={filename}"}
+            headers={"Content-Disposition": f"attachment; filename*=UTF-8''{encoded_filename}"}
         )
     except Exception as e:
-        return JSONResponse({"error": str(e)}, status_code=500)
-
+        import traceback
+        traceback.print_exc()

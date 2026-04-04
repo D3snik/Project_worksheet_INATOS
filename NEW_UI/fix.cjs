@@ -13,10 +13,9 @@ function walk(dir) {
     const p = path.join(dir, f);
     if (fs.statSync(p).isDirectory()) {
       walk(p);
-    } else if ([".tsx", ".ts", ".py", ".html"].some(ext => p.endsWith(ext))) {
+    } else if ([".tsx", ".ts"].some(ext => p.endsWith(ext))) {
       let content = fs.readFileSync(p, "utf8");
       let modified = content;
-      // Also catch Âº which comes up in Python code (13Âº)
       for (const [bad, good] of Object.entries(fixes)) {
         modified = modified.split(bad).join(good);
       }
@@ -27,6 +26,5 @@ function walk(dir) {
     }
   }
 }
-walk("./src");
-walk("../Export");
+walk("./src/app/components");
 

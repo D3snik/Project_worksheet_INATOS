@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowLeft, Wallet, TrendingUp, CheckCircle, BarChart3, FileText } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
-
+import logo from '../../assets/f267816345d6444779918b0e213ef56871972bde.png';
 
 interface DashboardProps {
   onNavigate: (page: 'home' | 'lancamentos' | 'guiasPrestacao') => void;
