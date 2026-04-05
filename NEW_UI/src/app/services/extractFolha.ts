@@ -1,12 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '') ?? '';
-
-function buildApiUrl(path: string) {
-  if (!API_BASE_URL) {
-    return path;
-  }
-
-  return `${API_BASE_URL}${path}`;
-}
+import { buildApiUrl, buildAuthHeaders, clearAuthToken } from './api';
 
 function getFilenameFromDisposition(header: string | null, fallback: string) {
   if (!header) {
@@ -28,10 +20,18 @@ export async function extractFolha(file: File) {
 
   const response = await fetch(buildApiUrl('/api/extract-folha'), {
     method: 'POST',
+    headers: {
+      ...buildAuthHeaders(),
+    },
     body: formData,
   });
 
   if (!response.ok) {
+    if (response.status === 401) {
+      clearAuthToken();
+      throw new Error('Sua sessão expirou. Faça login novamente.');
+    }
+
     let message = 'Não foi possível processar o arquivo.';
 
     try {

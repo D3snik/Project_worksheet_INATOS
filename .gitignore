@@ -10,4 +10,5 @@ env/
 dist/
 build/
 coverage/
+Export/data/*.db
 Relat*rio de Folha de Pagamento dos Funcion*rios*.PDF

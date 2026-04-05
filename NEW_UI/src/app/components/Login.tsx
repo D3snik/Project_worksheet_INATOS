@@ -5,17 +5,18 @@ import { motion } from 'motion/react';
 import BrandLogo from './BrandLogo';
 
 interface LoginProps {
-  onLogin: (username: string, password: string) => void;
+  onLogin: (username: string, password: string) => Promise<void>;
   error?: string;
+  isSubmitting?: boolean;
 }
 
-export default function Login({ onLogin, error }: LoginProps) {
+export default function Login({ onLogin, error, isSubmitting = false }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin(username, password);
+    await onLogin(username, password);
   };
 
   return (
@@ -61,6 +62,7 @@ export default function Login({ onLogin, error }: LoginProps) {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                disabled={isSubmitting}
                 className="w-full bg-white/5 backdrop-blur-sm border border-white/20 text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-white/40"
                 style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}
                 placeholder="Digite seu usuário"
@@ -76,6 +78,7 @@ export default function Login({ onLogin, error }: LoginProps) {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isSubmitting}
                 className="w-full bg-white/5 backdrop-blur-sm border border-white/20 text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-white/40"
                 style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}
                 placeholder="Digite sua senha"
@@ -98,14 +101,17 @@ export default function Login({ onLogin, error }: LoginProps) {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
+              disabled={isSubmitting}
               className="relative w-full flex items-center justify-center gap-2 px-4 py-3 text-white font-semibold text-sm rounded-xl overflow-hidden group"
               style={{
                 background: 'linear-gradient(135deg, #9333ea, #7c3aed)',
-                boxShadow: '0 4px 20px #9333ea60, inset 0 1px 0 rgba(255,255,255,0.2)'
+                boxShadow: '0 4px 20px #9333ea60, inset 0 1px 0 rgba(255,255,255,0.2)',
+                opacity: isSubmitting ? 0.8 : 1,
+                cursor: isSubmitting ? 'not-allowed' : 'pointer'
               }}
             >
               <LogIn className="w-4 h-4 relative z-10" style={{ filter: 'drop-shadow(0 0 8px currentColor)' }} />
-              <span className="relative z-10">Entrar no Sistema</span>
+              <span className="relative z-10">{isSubmitting ? 'Entrando...' : 'Entrar no Sistema'}</span>
               <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
           </form>

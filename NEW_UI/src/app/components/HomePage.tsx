@@ -1,4 +1,4 @@
-import { FileText, Receipt, FileSpreadsheet, Home } from 'lucide-react';
+import { FileText, Receipt, FileSpreadsheet, Home, LogOut, UserCircle2 } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 
@@ -7,10 +7,16 @@ import Inicio from './Inicio';
 import ExtracaoFolhaContainer from './ExtracaoFolhaContainer';
 import Notas from './Notas';
 import GlosasContainer from './GlosasContainer';
+import type { AuthUser } from '../services/auth';
 
 type Section = 'inicio' | 'extracaoFolha' | 'notas' | 'glosas';
 
-export default function HomePage() {
+interface HomePageProps {
+  currentUser: AuthUser;
+  onLogout: () => void;
+}
+
+export default function HomePage({ currentUser, onLogout }: HomePageProps) {
   const [activeSection, setActiveSection] = useState<Section>('inicio');
 
   const menuItems = [
@@ -117,7 +123,29 @@ export default function HomePage() {
         </nav>
 
         {/* Glossy Bottom Accent */}
-        <div className="p-4">
+        <div className="p-4 space-y-4">
+          <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white/80">
+            <div className="flex items-center gap-3">
+              <UserCircle2 className="h-5 w-5 text-purple-300" />
+              <div className="min-w-0">
+                <p className="text-xs uppercase tracking-[0.2em] text-white/40">Sessão</p>
+                <p className="truncate text-sm font-semibold text-white">Acesso autenticado</p>
+              </div>
+            </div>
+            <p className="mt-2 truncate text-xs text-white/50">
+              {currentUser.is_active ? 'Usuário validado pelo backend' : 'Sessão inativa'}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={onLogout}
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/10 hover:text-white"
+          >
+            <LogOut className="h-4 w-4" />
+            Sair
+          </button>
+
           <div className="h-1 w-full bg-gradient-to-r from-purple-600 via-blue-500 to-pink-600 rounded-full shadow-lg shadow-purple-500/50"
                style={{ boxShadow: '0 0 20px rgba(147, 51, 234, 0.6)' }}
           />

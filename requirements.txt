@@ -4,3 +4,6 @@ python-multipart
 pdfplumber
 xlsxwriter
 pandas
+PyJWT
+passlib
+python-dotenv
