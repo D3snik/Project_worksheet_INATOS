@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { LogIn } from 'lucide-react';
-import logo from '../../assets/f267816345d6444779918b0e213ef56871972bde.png';
+import { motion } from 'motion/react';
+
+import BrandLogo from './BrandLogo';
 
 interface LoginProps {
   onLogin: (username: string, password: string) => void;
@@ -17,71 +19,109 @@ export default function Login({ onLogin, error }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#1e3a5f] flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-10">
-          <div className="flex justify-center mb-6">
-            <img src={logo} alt="Inatos Logo" className="h-16 w-auto" />
-          </div>
-          <h1 className="text-2xl font-bold text-white mb-2">Bem-vindo</h1>
-          <p className="text-sm text-blue-200">Sistema de Gestão</p>
-        </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0f] via-[#0f1117] to-[#1a1b23] flex items-center justify-center px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+        className="w-full max-w-md"
+      >
         {/* Login Form */}
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h2 className="text-lg font-semibold text-slate-900 mb-6">Acesse sua conta</h2>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 p-8 shadow-2xl"
+          style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)' }}
+        >
+          {/* Logo */}
+          <div className="text-center mb-8">
+            <div className="flex justify-center mb-4">
+              <BrandLogo
+                imageClassName="h-16 w-auto drop-shadow-[0_0_20px_rgba(147,51,234,0.35)]"
+                subtitle="Sistema de Gestão Empresarial"
+                subtitleClassName="text-sm text-white/60 tracking-wide"
+              />
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent mb-2">
+              Bem-vindo
+            </h1>
+          </div>
+
+          <h2 className="text-xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent mb-6">
+            Acesse sua conta
+          </h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-white/80 mb-2">
                 Usuário
               </label>
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-transparent transition-all"
+                className="w-full bg-white/5 backdrop-blur-sm border border-white/20 text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-white/40"
+                style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}
                 placeholder="Digite seu usuário"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-white/80 mb-2">
                 Senha
               </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-white border border-slate-300 text-slate-900 text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f] focus:border-transparent transition-all"
+                className="w-full bg-white/5 backdrop-blur-sm border border-white/20 text-white text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-white/40"
+                style={{ boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}
                 placeholder="Digite sua senha"
                 required
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3">
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-gradient-to-br from-red-500/20 to-red-600/10 backdrop-blur-sm border border-red-500/30 text-red-200 text-sm rounded-xl px-4 py-3"
+                style={{ boxShadow: '0 0 20px rgba(239, 68, 68, 0.2), inset 0 1px 0 rgba(255,255,255,0.1)' }}
+              >
                 {error}
-              </div>
+              </motion.div>
             )}
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#2d4a6f] hover:bg-[#1e3a5f] text-white font-medium text-sm rounded-lg transition-colors"
+              className="relative w-full flex items-center justify-center gap-2 px-4 py-3 text-white font-semibold text-sm rounded-xl overflow-hidden group"
+              style={{
+                background: 'linear-gradient(135deg, #9333ea, #7c3aed)',
+                boxShadow: '0 4px 20px #9333ea60, inset 0 1px 0 rgba(255,255,255,0.2)'
+              }}
             >
-              <LogIn className="w-4 h-4" />
-              Entrar no Sistema
-            </button>
+              <LogIn className="w-4 h-4 relative z-10" style={{ filter: 'drop-shadow(0 0 8px currentColor)' }} />
+              <span className="relative z-10">Entrar no Sistema</span>
+              <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-blue-200 mt-6">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-center text-xs text-white/50 mt-6 tracking-wide"
+        >
           Acesso restrito a usuários autorizados
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
     </div>
   );
 }
+

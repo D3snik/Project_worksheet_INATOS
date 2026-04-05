@@ -3,8 +3,8 @@ import re
 import pandas as pd
 import pdfplumber
 
-from cargos.list_job_titles import CARGOS_POSSIVEIS
-from utils.extracao_campos import (
+from ..cargos.list_job_titles import CARGOS_POSSIVEIS
+from ..utils.extracao_campos import (
     extrair_atividade,
     extrair_desc_vt,
     extrair_econsignado,
@@ -19,7 +19,7 @@ from utils.extracao_campos import (
     extrair_salario_familia,
     extrair_totais,
 )
-from utils.tratamento_excecao import tratar_nome_cargo_excecao
+from ..utils.tratamento_excecao import tratar_nome_cargo_excecao
 
 
 COLUNAS_EXPORTACAO = [

@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { motion } from 'motion/react';
 import { ArrowLeft, Wallet, TrendingUp, CheckCircle, BarChart3, FileText } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
-import logo from '../../assets/f267816345d6444779918b0e213ef56871972bde.png';
 
 interface DashboardProps {
   onNavigate: (page: 'home' | 'lancamentos' | 'guiasPrestacao') => void;
@@ -71,96 +71,154 @@ export default function Dashboard({ onNavigate, onOpenLancamentos }: DashboardPr
       }));
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0f] via-[#0f1117] to-[#1a1b23]">
       <main className="px-8 py-8">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8 flex items-center justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mb-8 flex items-center justify-between"
+          >
             <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+              <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent mb-2">
                 Dashboard Financeiro
               </h2>
-              <p className="text-slate-600">
+              <p className="text-white/60 tracking-wide">
                 Acompanhamento em tempo real
               </p>
             </div>
 
-            {/* Botão Lançamentos */}
+            {/* Botão Lançamentos - Glossy */}
             {onOpenLancamentos && (
-              <button
+              <motion.button
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={onOpenLancamentos}
-                className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium text-sm rounded-lg transition-colors"
+                className="relative flex items-center gap-2 px-5 py-2.5 text-white font-semibold text-sm rounded-xl overflow-hidden group"
+                style={{
+                  background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                  boxShadow: '0 4px 20px #ef444460, inset 0 1px 0 rgba(255,255,255,0.2)'
+                }}
               >
-                <FileText className="w-4 h-4" />
-                Lançamentos
-              </button>
+                <FileText className="w-4 h-4 relative z-10" />
+                <span className="relative z-10">Lançamentos</span>
+                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.button>
             )}
-          </div>
+          </motion.div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8">
+          {/* Stats Grid - Glassmorphism */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                  delayChildren: 0.2
+                }
+              }
+            }}
+            className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8"
+          >
             {stats.map((stat, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white rounded-lg border border-slate-200 p-5"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }
+                  }
+                }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 p-5 shadow-2xl hover:border-white/30 transition-all"
+                style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)' }}
               >
-                <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-3">
-                  <stat.icon className={`w-6 h-6 ${stat.iconColor}`} />
-                </div>
-                <p className="text-slate-600 text-sm mb-1">{stat.title}</p>
-                <p className="text-xl font-bold text-slate-900">{stat.value}</p>
-              </div>
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/10 rounded-xl flex items-center justify-center mb-3 shadow-lg"
+                  style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)' }}
+                >
+                  <stat.icon className={`w-6 h-6 ${stat.iconColor}`} style={{ filter: 'drop-shadow(0 0 8px currentColor)' }} />
+                </motion.div>
+                <p className="text-white/60 text-sm mb-1 tracking-wide">{stat.title}</p>
+                <p className="text-xl font-bold text-white">{stat.value}</p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Main Chart Section */}
-          <div className="bg-white rounded-lg border border-slate-200 p-6 mb-6">
+          {/* Main Chart Section - Glassmorphism */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 p-6 mb-6 shadow-2xl"
+            style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)' }}
+          >
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
-                  <BarChart3 className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-gradient-to-br from-white/20 to-white/10 rounded-xl flex items-center justify-center shadow-lg"
+                     style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)' }}>
+                  <BarChart3 className="w-5 h-5 text-blue-400" style={{ filter: 'drop-shadow(0 0 8px currentColor)' }} />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900">Análise de Rubricas</h2>
-                  <p className="text-xs text-slate-600">Acompanhamento financeiro</p>
+                  <h2 className="text-lg font-bold text-white tracking-wide">Análise de Rubricas</h2>
+                  <p className="text-xs text-white/60">Acompanhamento financeiro</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                {/* View Mode Toggle */}
-                <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-1">
+                {/* View Mode Toggle - Glossy */}
+                <div className="flex items-center gap-1 bg-white/10 backdrop-blur-lg rounded-xl p-1 border border-white/20">
                   <button
                     onClick={() => setViewMode('monthly')}
-                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                    className={`px-3 py-1.5 text-sm font-semibold rounded-lg transition-all ${
                       viewMode === 'monthly'
-                        ? 'bg-white text-slate-900 shadow-sm'
-                        : 'text-slate-600 hover:text-slate-900'
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
+                        : 'text-white/60 hover:text-white'
                     }`}
+                    style={viewMode === 'monthly' ? {
+                      boxShadow: '0 4px 12px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)'
+                    } : {}}
                   >
                     Mensal
                   </button>
                   <button
                     onClick={() => setViewMode('category')}
-                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                    className={`px-3 py-1.5 text-sm font-semibold rounded-lg transition-all ${
                       viewMode === 'category'
-                        ? 'bg-white text-slate-900 shadow-sm'
-                        : 'text-slate-600 hover:text-slate-900'
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
+                        : 'text-white/60 hover:text-white'
                     }`}
+                    style={viewMode === 'category' ? {
+                      boxShadow: '0 4px 12px rgba(147, 51, 234, 0.4), inset 0 1px 0 rgba(255,255,255,0.2)'
+                    } : {}}
                   >
                     Categorias
                   </button>
                 </div>
 
-                {/* Project Filter */}
+                {/* Project Filter - Glossy */}
                 <select
                   value={selectedProject}
                   onChange={(e) => setSelectedProject(e.target.value)}
-                  className="bg-white border border-slate-300 text-slate-900 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-white/10 backdrop-blur-lg border border-white/20 text-white text-sm rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 font-semibold"
+                  style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)' }}
                 >
-                  <option value="all">Todos os Projetos</option>
-                  <option value="aps12">APS 1.2</option>
-                  <option value="alpha">Projeto Alpha</option>
-                  <option value="beta">Beta Systems</option>
-                  <option value="gamma">Gamma Corp</option>
-                  <option value="delta">Delta Finance</option>
+                  <option value="all" className="bg-[#1a1b23] text-white">Todos os Projetos</option>
+                  <option value="aps12" className="bg-[#1a1b23] text-white">APS 1.2</option>
+                  <option value="alpha" className="bg-[#1a1b23] text-white">Projeto Alpha</option>
+                  <option value="beta" className="bg-[#1a1b23] text-white">Beta Systems</option>
+                  <option value="gamma" className="bg-[#1a1b23] text-white">Gamma Corp</option>
+                  <option value="delta" className="bg-[#1a1b23] text-white">Delta Finance</option>
                 </select>
               </div>
             </div>
@@ -172,32 +230,35 @@ export default function Dashboard({ onNavigate, onOpenLancamentos }: DashboardPr
                   <AreaChart data={filteredData} key={`area-chart-${selectedProject}`}>
                     <defs>
                       <linearGradient id={`colorTotal-${selectedProject}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                        <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.6} />
+                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.1} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis dataKey="month" stroke="#64748b" style={{ fontSize: '12px' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                    <XAxis dataKey="month" stroke="rgba(255,255,255,0.6)" style={{ fontSize: '12px', fontWeight: '600' }} />
                     <YAxis
-                      stroke="#64748b"
-                      style={{ fontSize: '12px' }}
+                      stroke="rgba(255,255,255,0.6)"
+                      style={{ fontSize: '12px', fontWeight: '600' }}
                       tickFormatter={(value) => `R$ ${(value / 1000).toFixed(0)}k`}
                     />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#ffffff',
-                        border: '1px solid #e2e8f0',
-                        borderRadius: '8px',
-                        fontSize: '12px'
+                        backgroundColor: 'rgba(26, 27, 35, 0.95)',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        borderRadius: '12px',
+                        fontSize: '12px',
+                        backdropFilter: 'blur(12px)',
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                        color: '#fff'
                       }}
                       formatter={(value: number) => `R$ ${value.toLocaleString('pt-BR')}`}
                     />
-                    <Legend wrapperStyle={{ paddingTop: '16px', fontSize: '12px' }} />
+                    <Legend wrapperStyle={{ paddingTop: '16px', fontSize: '12px', fontWeight: '600' }} />
                     <Area
                       type="monotone"
                       dataKey="total"
-                      stroke="#3b82f6"
-                      strokeWidth={2}
+                      stroke="#8b5cf6"
+                      strokeWidth={3}
                       fillOpacity={1}
                       fill={`url(#colorTotal-${selectedProject})`}
                       name="Valor Total"
@@ -209,53 +270,94 @@ export default function Dashboard({ onNavigate, onOpenLancamentos }: DashboardPr
               <div className="h-80" key="category-chart-wrapper">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={categoryData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                    <XAxis dataKey="category" stroke="#64748b" style={{ fontSize: '12px' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                    <XAxis dataKey="category" stroke="rgba(255,255,255,0.6)" style={{ fontSize: '12px', fontWeight: '600' }} />
                     <YAxis
-                      stroke="#64748b"
-                      style={{ fontSize: '12px' }}
+                      stroke="rgba(255,255,255,0.6)"
+                      style={{ fontSize: '12px', fontWeight: '600' }}
                       tickFormatter={(value) => `R$ ${(value / 1000).toFixed(0)}k`}
                     />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#ffffff',
-                        border: '1px solid #e2e8f0',
-                        borderRadius: '8px',
-                        fontSize: '12px'
+                        backgroundColor: 'rgba(26, 27, 35, 0.95)',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        borderRadius: '12px',
+                        fontSize: '12px',
+                        backdropFilter: 'blur(12px)',
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                        color: '#fff'
                       }}
                       formatter={(value: number) => `R$ ${value.toLocaleString('pt-BR')}`}
                     />
-                    <Bar dataKey="value" fill="#3b82f6" radius={[6, 6, 0, 0]} name="Valor" />
+                    <Bar dataKey="value" fill="url(#barGradient)" radius={[8, 8, 0, 0]} name="Valor" />
+                    <defs>
+                      <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#8b5cf6" />
+                        <stop offset="100%" stopColor="#3b82f6" />
+                      </linearGradient>
+                    </defs>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             )}
-          </div>
+          </motion.div>
 
-          {/* Projects Overview */}
-          <div className="grid grid-cols-5 gap-4">
+          {/* Projects Overview - Glassmorphism Cards */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.08,
+                  delayChildren: 0.8
+                }
+              }
+            }}
+            className="grid grid-cols-5 gap-4"
+          >
             {projectsData.map((project, index) => (
-              <button
+              <motion.button
                 key={index}
-                className="bg-white rounded-lg border border-slate-200 hover:shadow-lg transition-all p-5"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  visible: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }
+                  }
+                }}
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 hover:border-white/30 transition-all p-5 shadow-2xl group"
                 onClick={() => setSelectedProject(project.name === 'APS 1.2' ? 'aps12' : 'all')}
+                style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)' }}
               >
                 <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-2"
-                  style={{ backgroundColor: `${project.color}20` }}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-2 shadow-lg"
+                  style={{
+                    background: `linear-gradient(135deg, ${project.color}40, ${project.color}60)`,
+                    boxShadow: `0 0 20px ${project.color}40, inset 0 1px 0 rgba(255,255,255,0.2)`
+                  }}
                 >
                   <div
                     className="w-5 h-5 rounded-full"
-                    style={{ backgroundColor: project.color }}
+                    style={{
+                      backgroundColor: project.color,
+                      boxShadow: `0 0 12px ${project.color}`
+                    }}
                   />
                 </div>
-                <h3 className="text-slate-900 font-semibold text-sm mb-1">{project.name}</h3>
-                <p className="text-slate-600 text-xs">Projeto Ativo</p>
-              </button>
+                <h3 className="text-white font-bold text-sm mb-1 tracking-wide">{project.name}</h3>
+                <p className="text-white/60 text-xs">Projeto Ativo</p>
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
         </div>
       </main>
     </div>
   );
 }
+

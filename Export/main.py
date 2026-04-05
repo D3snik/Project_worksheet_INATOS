@@ -3,8 +3,8 @@ import urllib.parse
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import Response, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from services.pdf_extractor import extrair_dados_pdf
-from services.excel_exporter import gerar_excel
+from .services.pdf_extractor import extrair_dados_pdf
+from .services.excel_exporter import gerar_excel
 
 app = FastAPI()
 
@@ -43,3 +43,7 @@ async def extract_folha(file: UploadFile = File(...)):
     except Exception as e:
         import traceback
         traceback.print_exc()
+        return JSONResponse(
+            {"error": f"Erro ao processar o arquivo: {str(e)}"},
+            status_code=500,
+        )
