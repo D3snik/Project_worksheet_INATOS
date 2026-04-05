@@ -7,6 +7,8 @@ import {
 } from './api';
 
 export interface AuthUser {
+  username: string;
+  full_name: string;
   is_active: boolean;
 }
 

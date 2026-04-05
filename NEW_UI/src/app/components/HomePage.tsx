@@ -129,12 +129,9 @@ export default function HomePage({ currentUser, onLogout }: HomePageProps) {
               <UserCircle2 className="h-5 w-5 text-purple-300" />
               <div className="min-w-0">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/40">Sessão</p>
-                <p className="truncate text-sm font-semibold text-white">Acesso autenticado</p>
+                <p className="truncate text-sm font-semibold text-white">{currentUser.full_name || currentUser.username}</p>
               </div>
             </div>
-            <p className="mt-2 truncate text-xs text-white/50">
-              {currentUser.is_active ? 'Usuário validado pelo backend' : 'Sessão inativa'}
-            </p>
           </div>
 
           <button

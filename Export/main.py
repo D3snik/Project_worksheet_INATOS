@@ -52,6 +52,8 @@ class LoginRequest(BaseModel):
 
 
 class UserResponse(BaseModel):
+    username: str
+    full_name: str
     is_active: bool
 
 
@@ -62,6 +64,8 @@ class LoginResponse(BaseModel):
 
 def serialize_user(user: AuthenticatedUser) -> UserResponse:
     return UserResponse(
+        username=user.username,
+        full_name=user.full_name,
         is_active=user.is_active,
     )
 
