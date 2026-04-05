@@ -7,6 +7,7 @@ from cargos.list_job_titles import CARGOS_POSSIVEIS
 from utils.extracao_campos import (
     extrair_atividade,
     extrair_desc_vt,
+    extrair_econsignado,
     extrair_imposto_renda,
     extrair_inss_13,
     extrair_inss_desc,
@@ -14,6 +15,7 @@ from utils.extracao_campos import (
     extrair_plano_odontologico,
     extrair_plano_saude,
     extrair_salario_base,
+    extrair_salario_contratual,
     extrair_salario_familia,
     extrair_totais,
 )
@@ -21,10 +23,12 @@ from utils.tratamento_excecao import tratar_nome_cargo_excecao
 
 
 COLUNAS_EXPORTACAO = [
+    "MATRÍCULA",
     "FUNCIONÁRIO",
     "CARGO",
     "ATIVIDADE",
     "SALARIO BASE",
+    "SALÁRIO CONTRATUAL",
     "SALARIO LIQUIDO",
     "BASE INSS PATRONAL",
     "BASE INSS",
@@ -38,6 +42,7 @@ COLUNAS_EXPORTACAO = [
     "PLANO ODONTOLÓGICO",
     "INSS 13º",
     "INSS SOBRE FÉRIAS",
+    "ECONSIGNADO",
 ]
 
 
@@ -47,6 +52,7 @@ def montar_linha_colaborador(bloco):
     nome_completo = ""
 
     if match_func:
+        linha["MATRÍCULA"] = match_func.group(1)
         nome_completo = match_func.group(2).strip()
         nome_corrigido, cargo_corrigido = tratar_nome_cargo_excecao(nome_completo)
 
@@ -69,6 +75,7 @@ def montar_linha_colaborador(bloco):
 
     linha["ATIVIDADE"] = extrair_atividade(bloco)
     linha["SALARIO BASE"] = extrair_salario_base(bloco)
+    linha["SALÁRIO CONTRATUAL"] = extrair_salario_contratual(bloco)
     linha["INSS DESCON"] = extrair_inss_desc(bloco)
     linha["SALARIOFAMILIA"] = extrair_salario_familia(bloco)
     linha["IMPOSTO DE RENDA"] = extrair_imposto_renda(bloco)
@@ -77,6 +84,7 @@ def montar_linha_colaborador(bloco):
     linha["PLANO ODONTOLÓGICO"] = extrair_plano_odontologico(bloco)
     linha["INSS 13º"] = extrair_inss_13(bloco)
     linha["INSS SOBRE FÉRIAS"] = extrair_inss_ferias(bloco)
+    linha["ECONSIGNADO"] = extrair_econsignado(bloco)
 
     totais = extrair_totais(bloco)
     for chave, valor in totais.items():

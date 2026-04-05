@@ -39,7 +39,7 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
     }
   };
 
-  const handleUpload = async () => {
+  const handleProcess = async () => {
     if (!selectedFile) return;
 
     setIsLoading(true);
@@ -73,14 +73,13 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = response.headers.get('Content-Disposition')?.split('filename=')?.[1] || `extracao_geral_${selectedFile.name.replace('.pdf', '')}.xlsx`;
+      a.download = response.headers.get('Content-Disposition')?.split('filename=')?.[1]?.replace(/['"]/g, '') || `extracao_geral_${selectedFile.name.replace('.pdf', '')}.xlsx`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-
     } catch (err: any) {
-      console.error('Upload error:', err);
+      console.error('Processing error:', err);
       setError(err.message);
     } finally {
       setIsLoading(false);
@@ -157,7 +156,9 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
                       </div>
                     </div>
                     <button
-                      onClick={() => setSelectedFile(null)}
+                      onClick={() => {
+                        setSelectedFile(null);
+                      }}
                       className="text-sm text-slate-600 hover:text-red-600 font-medium"
                     >
                       Remover
@@ -175,11 +176,11 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
             </div>
           )}
 
-          {/* Upload Button */}
+          {/* Botões de Ação */}
           {selectedFile && (
-            <div className="mt-6">
+            <div className="mt-6 flex flex-col gap-3">
               <button
-                onClick={handleUpload}
+                onClick={handleProcess}
                 disabled={isLoading}
                 className={`w-full py-3 ${isLoading ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white font-semibold rounded-lg transition-colors`}
               >
