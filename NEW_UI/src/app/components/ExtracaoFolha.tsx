@@ -1,4 +1,4 @@
-import { ArrowLeft, Upload, FileText } from 'lucide-react';
+import { Upload, FileText } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 
@@ -8,7 +8,7 @@ interface ExtracaoFolhaProps {
   onNavigate: (page: 'home') => void;
 }
 
-export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
+export default function ExtracaoFolhaGeral({ onNavigate: _onNavigate }: ExtracaoFolhaProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -78,9 +78,7 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0f] via-[#0f1117] to-[#1a1b23]">
-      {/* Main Content */}
-      <main className="px-8 py-12">
+    <main className="px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -247,7 +245,6 @@ export default function ExtracaoFolhaGeral({ onNavigate }: ExtracaoFolhaProps) {
           )}
         </motion.div>
       </main>
-    </div>
   );
 }
 

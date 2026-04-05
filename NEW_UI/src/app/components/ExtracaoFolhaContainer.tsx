@@ -8,9 +8,8 @@ export default function ExtracaoFolhaContainer() {
   const [activeView, setActiveView] = useState<ExtracaoView>('prestacoes');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0b0f] via-[#0f1117] to-[#1a1b23]">
-      {/* Navigation Tabs - Glassmorphism */}
-      <div className="bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-xl border-b border-white/10">
+    <div className="h-full bg-gradient-to-br from-[#0a0b0f] via-[#0f1117] to-[#1a1b23] overflow-auto">
+      <div className="bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-xl border-b border-white/10 sticky top-0 z-10">
         <div className="px-8 py-4">
           <div className="flex gap-4">
             <button
