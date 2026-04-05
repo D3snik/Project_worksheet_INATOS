@@ -40,7 +40,7 @@ export default function Login({ onLogin, error, isSubmitting = false }: LoginPro
             <div className="flex justify-center mb-4">
               <BrandLogo
                 imageClassName="h-16 w-auto drop-shadow-[0_0_20px_rgba(147,51,234,0.35)]"
-                subtitle="Sistema de Gestão Empresarial"
+                subtitle="Sistema de Gestão"
                 subtitleClassName="text-sm text-white/60 tracking-wide"
               />
             </div>

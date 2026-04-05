@@ -1,6 +1,8 @@
 import { FileSpreadsheet, Receipt, FileText, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
+const defaultEase = [0.25, 0.1, 0.25, 1] as const;
+
 interface InicioProps {
   onNavigate: (section: 'extracaoFolha' | 'notas' | 'glosas') => void;
 }
@@ -24,7 +26,7 @@ export default function Inicio({ onNavigate }: InicioProps) {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.25, 0.1, 0.25, 1]
+        ease: defaultEase
       }
     }
   };
@@ -37,7 +39,7 @@ export default function Inicio({ onNavigate }: InicioProps) {
       bgColor: 'bg-emerald-100',
       iconColor: 'text-emerald-600',
       buttonColor: 'bg-emerald-600 hover:bg-emerald-700',
-      description: 'Processamento de folhas de pagamento com opções para extração geral e específica para prestações de contas. Análise detalhada de dados financeiros e recursos humanos.'
+      description: 'Processamento de folhas de pagamento para prestações de contas. Análise detalhada de dados financeiros e recursos humanos.'
     },
     {
       id: 'notas',
@@ -66,7 +68,7 @@ export default function Inicio({ onNavigate }: InicioProps) {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.6, ease: defaultEase }}
             className="mb-12 text-center"
           >
             <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent mb-3 drop-shadow-lg">
@@ -140,7 +142,7 @@ export default function Inicio({ onNavigate }: InicioProps) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.6, delay: 0.6, ease: defaultEase }}
             className="mt-12 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl"
             style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)' }}
           >
