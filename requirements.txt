@@ -7,3 +7,4 @@ pandas
 PyJWT
 passlib
 python-dotenv
+psycopg[binary]

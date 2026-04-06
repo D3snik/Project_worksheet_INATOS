@@ -63,7 +63,7 @@ def _row_to_user(row) -> AuthenticatedUser:
 def get_user_by_username(username: str) -> AuthenticatedUser | None:
     with get_connection() as connection:
         row = connection.execute(
-            "SELECT id, username, full_name, is_active FROM users WHERE username = ?",
+            "SELECT id, username, full_name, is_active FROM users WHERE username = %s",
             (username,),
         ).fetchone()
 
@@ -76,7 +76,7 @@ def get_user_by_username(username: str) -> AuthenticatedUser | None:
 def get_user_by_id(user_id: int) -> AuthenticatedUser | None:
     with get_connection() as connection:
         row = connection.execute(
-            "SELECT id, username, full_name, is_active FROM users WHERE id = ?",
+            "SELECT id, username, full_name, is_active FROM users WHERE id = %s",
             (user_id,),
         ).fetchone()
 
@@ -89,7 +89,7 @@ def get_user_by_id(user_id: int) -> AuthenticatedUser | None:
 def ensure_seed_user() -> None:
     with get_connection() as connection:
         existing_user = connection.execute(
-            "SELECT id FROM users WHERE username = ?",
+            "SELECT id FROM users WHERE username = %s",
             (SEED_USERNAME,),
         ).fetchone()
 
@@ -99,11 +99,10 @@ def ensure_seed_user() -> None:
         connection.execute(
             """
             INSERT INTO users (username, full_name, password_hash, is_active)
-            VALUES (?, ?, ?, 1)
+            VALUES (%s, %s, %s, TRUE)
             """,
             (SEED_USERNAME, SEED_FULL_NAME, hash_password(SEED_PASSWORD)),
         )
-        connection.commit()
 
 
 def authenticate_user(username: str, password: str) -> AuthenticatedUser | None:
@@ -112,7 +111,7 @@ def authenticate_user(username: str, password: str) -> AuthenticatedUser | None:
             """
             SELECT id, username, full_name, password_hash, is_active
             FROM users
-            WHERE username = ?
+            WHERE username = %s
             """,
             (username,),
         ).fetchone()
